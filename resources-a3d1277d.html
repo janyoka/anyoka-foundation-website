@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Resources — Anyoka Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFFDF5; --cream-deep: #FBF6E9; --ink: #1A1208;
+    --green: #0F6E56; --green-mid: #1D9E75; --green-pale: #E1F5EE;
+    --gold: #F5C842; --gold-deep: #C8922A; --gold-pale: #FEF9E6;
+    --orange: #F5813F; --orange-pale: #FEF0E6;
+    --pink: #D4537E; --pink-pale: #FBEAF0;
+    --purple: #7F77DD; --purple-pale: #EEEDFE;
+    --blue: #378ADD; --blue-pale: #E6F1FB;
+    --gray: #6B6A63; --border: rgba(26,18,8,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  nav { position: sticky; top: 0; z-index: 200; background: rgba(255,253,245,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0.9rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .nav-brand { display: flex; align-items: center; gap: 10px; }
+  .nav-brand img { width: 36px; height: auto; }
+  .nav-brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+  .nav-brand-text strong { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; color: var(--green); }
+  .nav-brand-text span { font-size: 9px; letter-spacing: 0.08em; color: var(--gray); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 1.8rem; align-items: center; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); padding: 4px 0; transition: color 0.2s; }
+  .nav-links a.active { color: var(--green); font-weight: 700; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta { background: var(--green); color: white !important; padding: 9px 20px; border-radius: 100px; font-weight: 600 !important; transition: background 0.2s, transform 0.2s; }
+  .nav-cta:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 100px; font-weight: 600; font-size: 14.5px; transition: transform 0.2s, box-shadow 0.2s; border: none; cursor: pointer; }
+  .btn-primary { background: var(--green); color: white; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,110,86,0.25); }
+  .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); }
+
+  /* HERO */
+  .page-hero { padding: 4rem 2rem 2.5rem; text-align: center; }
+  .page-hero .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
+  .page-hero h1 { font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-weight: 600; max-width: 720px; margin: 0 auto 1.2rem; line-height: 1.15; }
+  .page-hero p { font-size: 1.05rem; color: var(--gray); max-width: 580px; margin: 0 auto 2rem; line-height: 1.7; }
+
+  /* SHOPIFY BANNER */
+  .shopify-banner {
+    background: var(--ink); color: white; border-radius: 20px;
+    padding: 1.6rem 2.4rem; display: flex; align-items: center;
+    justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
+    max-width: 860px; margin: 0 auto 3.5rem;
+  }
+  .shopify-banner p { font-size: 1rem; color: rgba(255,253,245,0.85); }
+  .shopify-banner p strong { color: white; }
+  .btn-gold { background: var(--gold); color: var(--ink); font-weight: 700; white-space: nowrap; }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+
+  section { padding: 0 2rem 4.5rem; }
+  .section-inner { max-width: 1180px; margin: 0 auto; }
+  .section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Fraunces', serif; font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 600; line-height: 1.2; margin-bottom: 0.6rem; }
+
+  /* FILTER TABS */
+  .filter-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .filter-tab { padding: 9px 20px; border-radius: 100px; font-size: 13.5px; font-weight: 600; border: 1.5px solid var(--border); background: white; color: var(--gray); cursor: pointer; transition: all 0.18s; }
+  .filter-tab.active { background: var(--ink); color: white; border-color: var(--ink); }
+
+  /* PRODUCT GRID */
+  .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
+  .product-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); display: flex; flex-direction: column; transition: transform 0.25s, box-shadow 0.25s; }
+  .product-card:hover { transform: translateY(-5px); box-shadow: 0 16px 32px rgba(26,18,8,0.09); }
+  .product-thumb { aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; position: relative; }
+  .product-thumb .tag { position: absolute; top: 12px; left: 12px; background: rgba(255,255,255,0.95); color: var(--ink); font-size: 10.5px; font-weight: 700; padding: 5px 12px; border-radius: 100px; }
+  .product-body { padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+  .product-body .age { font-size: 0.78rem; color: var(--gray); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+  .product-body h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; line-height: 1.3; }
+  .product-body .desc { font-size: 0.9rem; color: var(--gray); line-height: 1.65; flex: 1; }
+  .product-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid var(--border); }
+  .price-tag { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 600; color: var(--green); }
+  .view-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 700; color: var(--green); transition: gap 0.2s; }
+  .product-card:hover .view-btn { gap: 8px; }
+  .view-btn::after { content: '→'; }
+
+  /* BUNDLE */
+  .bundle-card {
+    background: linear-gradient(135deg, var(--ink) 0%, #2C2316 100%);
+    border-radius: 24px; padding: 2.6rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem; flex-wrap: wrap; margin-bottom: 3rem; color: white;
+  }
+  .bundle-card h3 { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .bundle-card p { color: rgba(255,253,245,0.75); font-size: 0.95rem; max-width: 480px; }
+  .bundle-pricing { text-align: right; flex-shrink: 0; }
+  .bundle-pricing .was { text-decoration: line-through; color: rgba(255,253,245,0.45); font-size: 0.9rem; }
+  .bundle-pricing .now { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 600; color: var(--gold); display: block; }
+
+  /* HOW IT WORKS */
+  .how-band { background: var(--green-pale); border-radius: 24px; padding: 2.8rem 3rem; margin-top: 0.5rem; }
+  .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 1.8rem; }
+  .how-step { text-align: center; }
+  .how-num { width: 38px; height: 38px; border-radius: 50%; background: var(--green); color: white; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 600; margin: 0 auto 0.8rem; }
+  .how-step h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .how-step p { font-size: 0.85rem; color: var(--gray); line-height: 1.6; }
+
+  /* SCHOOL NOTE */
+  .school-note { background: var(--gold-pale); border: 1px solid #F0DFA0; border-radius: 18px; padding: 1.6rem 2rem; display: flex; align-items: center; gap: 1.4rem; margin-top: 3rem; }
+  .school-note p { font-size: 0.95rem; color: #5C4400; line-height: 1.7; }
+  .school-note strong { color: var(--ink); }
+
+  footer { background: var(--ink); color: rgba(255,253,245,0.7); padding: 4rem 2rem 2rem; margin-top: 2rem; }
+  .footer-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,253,245,0.12); }
+  .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+  .footer-brand img { width: 34px; }
+  .footer-brand strong { font-family: 'Fraunces', serif; color: white; font-size: 1.1rem; }
+  footer h5 { color: white; font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  footer a { font-size: 14px; transition: color 0.2s; }
+  footer a:hover { color: var(--gold); }
+  .footer-bottom { max-width: 1180px; margin: 0 auto; padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 13px; color: rgba(255,253,245,0.5); }
+  .footer-social { display: flex; gap: 14px; }
+  .footer-social a { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,253,245,0.2); display: flex; align-items: center; justify-content: center; font-size: 11px; }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .product-grid { grid-template-columns: 1fr 1fr; }
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .bundle-card { flex-direction: column; }
+    .bundle-pricing { text-align: left; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .shopify-banner { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 560px) { .product-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="assets/logo.png" alt="Anyoka Foundation logo">
+    <div class="nav-brand-text"><strong>Anyoka</strong><span>Foundation</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="about.html">About</a>
+    <a href="programs.html">Programs</a>
+    <a href="resources.html" class="active">Our Resources</a>
+    <a href="school-donations.html">School Donations</a>
+    <a href="blog.html">Blog</a>
+    <a href="free-games.html">Free Games</a>
+    <a href="anyoka-play.html">Anyoka Play</a>
+    <a href="contact.html">Contact</a>
+    <a href="donate.html" class="nav-cta">Donate</a>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <p class="eyebrow">Anyoka Learning</p>
+  <h1>Cognitive tools, ready to use today.</h1>
+  <p>Every resource below is published by Anyoka Learning — our educational arm. Browse here, then purchase on our dedicated store. Every sale supports our programmes.</p>
+
+  <div class="shopify-banner">
+    <p><strong>All products are sold on our Anyoka Learning store.</strong><br>Browse the full catalogue, complete your purchase securely, and receive your download instantly.</p>
+    <a href="https://anyokalearning.com" target="_blank" rel="noopener" class="btn btn-gold">Visit Anyoka Learning →</a>
+  </div>
+</header>
+
+<section>
+  <div class="section-inner">
+
+
+  <div style="background:var(--gold-pale); border:1px solid #F0DFA0; border-radius:18px; padding:1.6rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; margin-bottom:2rem;">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <span style="font-size:2rem; flex-shrink:0;">🎮</span>
+      <div>
+        <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--gold-deep); margin-bottom:4px; font-family:'DM Mono',monospace;">Anyoka Play — Free Platform</p>
+        <p style="font-size:0.95rem; color:#5C4400; font-weight:600; margin:0;">Are you a teacher or school? Try Anyoka Play — our free curriculum-aligned maths platform for Basic 3–6.</p>
+      </div>
+    </div>
+    <a href="anyoka-play.html" style="background:var(--green); color:white; padding:11px 22px; border-radius:100px; font-weight:700; font-size:13.5px; white-space:nowrap; flex-shrink:0;">Learn more →</a>
+  </div>
+
+    <!-- Bundle -->
+    <a href="https://anyokalearning.com" target="_blank" rel="noopener" class="bundle-card">
+      <div>
+        <h3>The Complete Anyoka Learning Bundle</h3>
+        <p>All 6 digital products — activity books, worksheets, flashcard sets, teacher toolkit, toddler guide, and the Summer School-in-a-Box. Best value for schools and families.</p>
+      </div>
+      <div class="bundle-pricing">
+        <span class="was">GHS 405</span>
+        <span class="now">GHS 350</span>
+        <span style="font-size:12px;color:rgba(255,253,245,0.55);margin-top:4px;display:block;">Available at anyokalearning.com</span>
+      </div>
+    </a>
+
+    <!-- Filter tabs -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="showGroup('all',this)">All resources</button>
+      <button class="filter-tab" onclick="showGroup('digital',this)">Digital downloads</button>
+      <button class="filter-tab" onclick="showGroup('physical',this)">Physical products</button>
+    </div>
+
+    <!-- Digital products -->
+    <div id="group-digital">
+      <p class="section-label">Digital downloads — Instant delivery</p>
+      <div class="product-grid" style="margin-bottom:3rem;">
+
+        <div class="product-card">
+          <div class="product-thumb" style="background:var(--green);">
+            <span class="tag">PDF · 15 pages</span>
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg>
+          </div>
+          <div class="product-body">
+            <span class="age">Ages 4–10</span>
+            <h3>Brain Booster Activity Book</h3>
+            <p class="desc">25 puzzles, memory games, logic challenges, and creative activities your child can do at home with no prep needed.</p>
+            <div class="product-foot">
+              <span class="price-tag">GHS 45</span>
+              <a href="https://anyokalearning.com" target="_blank" rel="noopener" class="view-btn">Get it</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-thumb" style="background:var(--orange);">
+            <span class="tag">PDF · 27 pages</span>
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>
+          </div>
+          <div class="product-body">
+            <span class="age">Ages 5–12</span>
+            <h3>Weekly Cognitive Worksheet Pack</h3>
+            <p class="desc">4 weeks of daily worksheets — one per day — covering all 7 cognitive skills. Structured enough for home use, flexible enough for any classroom.</p>
+            <div class="product-foot">
+              <span class="price-tag">GHS 65</span>
+              <a href="https://anyokalearning.com" target="_blank" rel="noopener" class="view-btn">Get it</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-thumb" style="background:var(--blue);">
+            <span class="tag">PDF · 37 pages</span>
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" stroke-width="1.5"><path d="M12 2L4 7v10l8 5 8-5V7z"/></svg>
+          </div>
+          <div class="product-body">
+            <span class="age">Ages 0–3</span>
+            <h3>Toddler Brain Builder Guide</h3>
+            <p class="desc">30 simple, no-toy-required activities across 3 age bands. Built for busy parents who want to do something — but don't know where to start.</p>
+            <div class="product-foot">
+              <span class="price-tag">GHS 55</span>
+              <a href="https://anyokalearning.com" target="_blank" rel="noopener" class="view-btn">Get it</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-thumb" style="background:var(--pink);">
+            <span class="tag">PDF · 6 sets, 10 cards each</span>
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>
+          </div>
+          <div class="product-body">
+            <span class="age">Ages 3–8</span>
+            <h3>Cognitive Flashcard Sets</h3>
+            <p class="desc">6 printable sets covering memory, patterns, Ghana knowledge, feelings, thinking speed, and storytelling. Print, cut, and play in minutes.</p>
+            <div class="product-foot">
+              <span class="price-tag">GHS 35</span>
+              <a href="https://anyokalearning.com" target="_blank" rel="noopener" class="view-btn">Get it</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-thumb" style="background:var(--purple);">
+            <span class="tag">PDF · 20 pages</span>
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" stroke-width="1.5"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M3 9v6l9 5 9-5V9"/></svg>
+          </div>
+          <div class="product-body">
+            <span class="age">Teachers · Ages 5–14</span>
+            <h3>Teacher Cognitive Toolkit</h3>
+            <p class="desc">A full-term, 10-week classroom programme with lesson structures, games, observation sheets, assessments, and a parent letter. Ghana curriculum-aligned.</p>
+            <div class="product-foot">
+              <span class="price-tag">GHS 120</span>
+              <a href="https://anyokalearning.com" target="_blank" rel="noopener" class="view-btn">Get it</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-thumb" style="background:var(--gold-deep);">
+            <span class="tag">PDF · 29 pages</span>
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8L7 17M17 7l2.8-2.8"/></svg>
+          </div>
+          <div class="product-body">
+            <span class="age">Ages 6–14</span>
+            <h3>Summer School-in-a-Box</h3>
+            <p class="desc">4 weeks, 20 daily activities, achievement badges, and a graduation certificate. A complete cognitive holiday programme — no school building required.</p>
+            <div class="product-foot">
+              <span class="price-tag">GHS 180</span>
+              <a href="https://anyokalearning.com" target="_blank" rel="noopener" class="view-btn">Get it</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Physical products -->
+    <div id="group-physical">
+      <p class="section-label">Physical products — Delivered across Ghana</p>
+      <div class="product-grid" style="margin-bottom:2.5rem;">
+
+        <div class="product-card">
+          <div class="product-thumb" style="background:var(--purple);">
+            <span class="tag">Physical · 48 pieces</span>
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <div class="product-body">
+            <span class="age">Ages 5–10</span>
+            <h3>Cognitive Jigsaw Puzzle — Ghana Edition</h3>
+            <p class="desc">A 48-piece puzzle celebrating Ghanaian culture. Trains spatial reasoning, patience, and visual pattern recognition.</p>
+            <div class="product-foot">
+              <span class="price-tag">GHS 60</span>
+              <a href="https://anyokalearning.com" target="_blank" rel="noopener" class="view-btn">Get it</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-thumb" style="background:var(--pink);">
+            <span class="tag">Physical · 60 cards</span>
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>
+          </div>
+          <div class="product-body">
+            <span class="age">Ages 3–8</span>
+            <h3>Printed Flashcard Set</h3>
+            <p class="desc">Durable, laminated, ready-to-use. No printing or cutting required — open the pack and start playing immediately.</p>
+            <div class="product-foot">
+              <span class="price-tag">GHS 50</span>
+              <a href="https://anyokalearning.com" target="_blank" rel="noopener" class="view-btn">Get it</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-thumb" style="background:var(--orange);">
+            <span class="tag">Physical · Box set</span>
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <div class="product-body">
+            <span class="age">Ages 5–14 · Schools</span>
+            <h3>Classroom Cognitive Kit</h3>
+            <p class="desc">Puzzles, flashcards, and activity sheets bundled for one classroom of 30. Ideal for schools and community groups.</p>
+            <div class="product-foot">
+              <span class="price-tag">GHS 150</span>
+              <a href="https://anyokalearning.com" target="_blank" rel="noopener" class="view-btn">Get it</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="school-note">
+        <span style="font-size:2rem; flex-shrink:0;">🏫</span>
+        <p><strong>Are you a school in need?</strong> We donate classroom cognitive kits to under-resourced schools across Ghana at no cost — and we also provide Foundation Support: school furniture, learning materials, and basic health access where it's needed. <a href="school-donations.html" style="color:var(--green); font-weight:700;">Apply for a free kit →</a></p>
+      </div>
+    </div>
+
+    <!-- How it works -->
+    <div class="how-band" style="margin-top:3rem;">
+      <p class="section-label" style="text-align:center;">How purchasing works</p>
+      <h2 style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;text-align:center;">Simple. Secure. Instant for digital.</h2>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-num">1</div>
+          <h4>Browse here</h4>
+          <p>Find the resource that's right for your child, student, or classroom.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">2</div>
+          <h4>Go to Anyoka Learning</h4>
+          <p>Click any "Get it" link — you'll land on the matching product page at anyokalearning.com.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">3</div>
+          <h4>Pay securely</h4>
+          <p>Card or mobile money accepted. Powered by Paystack — your payment details are never stored.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">4</div>
+          <h4>Download instantly</h4>
+          <p>Digital products arrive by email the moment payment clears. Physical products delivered across Ghana.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><img src="assets/logo.png" alt="Anyoka Foundation logo"><strong>Anyoka Foundation</strong></div>
+      <p style="font-size:14px; max-width:280px; margin-bottom:1.2rem;">Where young minds catch great ideas. Tema, Greater Accra, Ghana.</p>
+      <p style="font-size:13px; color:var(--gold); font-style:italic;">Catch Potential. Change Futures.</p>
+    </div>
+    <div><h5>Explore</h5><ul><li><a href="about.html">About us</a></li><li><a href="programs.html">Programs</a></li><li><a href="resources.html">Our Resources</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+    <div><h5>Get involved</h5><ul><li><a href="donate.html">Donate</a></li><li><a href="school-donations.html">School donations</a></li><li><a href="contact.html">Volunteer</a></li><li><a href="contact.html">Partner with us</a></li></ul></div>
+    <div><h5>Contact</h5><ul><li><a href="mailto:info@anyokafoundation.org">info@anyokafoundation.org</a></li><li><a href="#">Tema, Greater Accra</a></li><li><a href="contact.html">Contact form</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Anyoka Foundation. Products sold via <a href="https://anyokalearning.com" target="_blank" style="color:var(--gold);">anyokalearning.com</a></span>
+    <div class="footer-social"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="Facebook">FB</a><a href="#" aria-label="WhatsApp">WA</a></div>
+    <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+  </div>
+</footer>
+
+<script>
+  function showGroup(group, btn) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    const digital = document.getElementById('group-digital');
+    const physical = document.getElementById('group-physical');
+    if (group === 'all') { digital.style.display = ''; physical.style.display = ''; }
+    else if (group === 'digital') { digital.style.display = ''; physical.style.display = 'none'; }
+    else { digital.style.display = 'none'; physical.style.display = ''; }
+  }
+</script>
+
+</body>
+</html>

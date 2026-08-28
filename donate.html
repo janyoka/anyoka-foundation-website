@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate — Anyoka Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFFDF5; --cream-deep: #FBF6E9; --ink: #1A1208;
+    --green: #0F6E56; --green-mid: #1D9E75; --green-pale: #E1F5EE;
+    --gold: #F5C842; --gold-deep: #C8922A; --gold-pale: #FEF9E6;
+    --orange: #F5813F; --pink: #D4537E; --purple: #7F77DD; --blue: #378ADD;
+    --gray: #6B6A63; --border: rgba(26,18,8,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  nav { position: sticky; top: 0; z-index: 200; background: rgba(255,253,245,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0.9rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .nav-brand { display: flex; align-items: center; gap: 10px; }
+  .nav-brand img { width: 36px; height: auto; }
+  .nav-brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+  .nav-brand-text strong { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; color: var(--green); }
+  .nav-brand-text span { font-size: 9px; letter-spacing: 0.08em; color: var(--gray); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 1.8rem; align-items: center; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); padding: 4px 0; transition: color 0.2s; }
+  .nav-links a.active { color: var(--green); font-weight: 700; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta { background: var(--green); color: white !important; padding: 9px 20px; border-radius: 100px; font-weight: 600 !important; }
+
+  .btn { display: inline-flex; align-items: center; justify-content:center; gap: 8px; padding: 13px 26px; border-radius: 100px; font-weight: 600; font-size: 14.5px; transition: transform 0.2s, box-shadow 0.2s; border: none; cursor: pointer; }
+  .btn-primary { background: var(--green); color: white; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,110,86,0.25); }
+  .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); }
+  .btn-full { width: 100%; }
+
+  .page-hero { padding: 4rem 2rem 2.5rem; text-align: center; }
+  .page-hero .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1rem; }
+  .page-hero h1 { font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-weight: 600; max-width: 700px; margin: 0 auto 1.2rem; line-height: 1.15; }
+  .page-hero p { font-size: 1.05rem; color: var(--gray); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+  section { padding: 0 2rem 4.5rem; }
+  .section-inner { max-width: 1080px; margin: 0 auto; }
+  .section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Fraunces', serif; font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
+
+  /* GIVING TYPE TOGGLE */
+  .give-toggle { display: flex; justify-content: center; gap: 8px; margin-bottom: 2.5rem; }
+  .give-toggle button { padding: 11px 24px; border-radius: 100px; font-size: 14px; font-weight: 600; border: 1.5px solid var(--border); background: white; color: var(--gray); cursor: pointer; }
+  .give-toggle button.active { background: var(--ink); color: white; border-color: var(--ink); }
+
+  /* AMOUNT GRID */
+  .donate-card { background: white; border: 1px solid var(--border); border-radius: 24px; padding: 2.6rem; max-width: 640px; margin: 0 auto; }
+  .amount-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-bottom: 1.2rem; }
+  .amount-opt { padding: 16px; border-radius: 14px; border: 1.5px solid var(--border); text-align: center; cursor: pointer; background: var(--cream-deep); transition: all 0.15s; }
+  .amount-opt strong { display: block; font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 600; }
+  .amount-opt span { font-size: 11px; color: var(--gray); }
+  .amount-opt.selected { border-color: var(--green); background: var(--green-pale); }
+  .custom-amount { display: flex; align-items: center; gap: 10px; border: 1.5px solid var(--border); border-radius: 14px; padding: 14px 18px; margin-bottom: 1.6rem; }
+  .custom-amount span { font-weight: 700; color: var(--gray); }
+  .custom-amount input { border: none; outline: none; flex: 1; font-size: 16px; font-family: 'DM Sans', sans-serif; background: transparent; }
+
+  .impact-note { background: var(--gold-pale); border-radius: 12px; padding: 14px 18px; font-size: 13.5px; color: #5C4400; margin-bottom: 1.6rem; }
+
+  /* IMPACT GRID */
+  .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  .impact-card { background: white; border: 1px solid var(--border); border-radius: 18px; padding: 1.8rem; }
+  .impact-card .amt { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600; color: var(--green); margin-bottom: 0.5rem; }
+  .impact-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
+
+  /* OTHER WAYS */
+  .ways-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  .way-card { background: white; border: 1px solid var(--border); border-radius: 18px; padding: 2rem; }
+  .way-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .way-card h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.6rem; }
+  .way-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.65; margin-bottom: 1rem; }
+
+  /* TRANSPARENCY */
+  .transparency-box { background: var(--green-pale); border-radius: 24px; padding: 2.6rem; display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
+  .transparency-box p { color: #085041; font-size: 0.98rem; line-height: 1.75; flex: 1; min-width: 260px; }
+
+  footer { background: var(--ink); color: rgba(255,253,245,0.7); padding: 4rem 2rem 2rem; margin-top: 2rem; }
+  .footer-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,253,245,0.12); }
+  .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+  .footer-brand img { width: 34px; }
+  .footer-brand strong { font-family: 'Fraunces', serif; color: white; font-size: 1.1rem; }
+  footer h5 { color: white; font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  footer a { font-size: 14px; transition: color 0.2s; }
+  footer a:hover { color: var(--gold); }
+  .footer-bottom { max-width: 1180px; margin: 0 auto; padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 13px; color: rgba(255,253,245,0.5); }
+  .footer-social { display: flex; gap: 14px; }
+  .footer-social a { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,253,245,0.2); display: flex; align-items: center; justify-content: center; font-size: 11px; }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .impact-grid { grid-template-columns: 1fr; }
+    .ways-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) { .amount-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="assets/logo.png" alt="Anyoka Foundation logo">
+    <div class="nav-brand-text"><strong>Anyoka</strong><span>Foundation</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="about.html">About</a>
+    <a href="programs.html">Programs</a>
+    <a href="resources.html">Our Resources</a>
+    <a href="school-donations.html">School Donations</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a href="donate.html" class="nav-cta">Donate</a>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <p class="eyebrow">Support Our Mission</p>
+  <h1>Help a child catch their potential.</h1>
+  <p>Every gift goes directly toward cognitive development programmes, free school kits, and our long-term dream: Ghana's first cognitive development educational complex.</p>
+</header>
+
+<section>
+  <div class="section-inner">
+    <div class="give-toggle">
+      <button class="active" onclick="setGiving('once', this)">Give once</button>
+      <button onclick="setGiving('monthly', this)">Give monthly</button>
+    </div>
+
+    <div class="donate-card">
+      <div class="amount-grid">
+        <div class="amount-opt" onclick="selectAmount(this, 50)"><strong>GHS 50</strong><span>Supplies for 1 child</span></div>
+        <div class="amount-opt selected" onclick="selectAmount(this, 150)"><strong>GHS 150</strong><span>1 classroom kit</span></div>
+        <div class="amount-opt" onclick="selectAmount(this, 500)"><strong>GHS 500</strong><span>A small school reached</span></div>
+      </div>
+      <div class="custom-amount">
+        <span>GHS</span>
+        <input type="number" id="custom-amount" placeholder="Enter a custom amount">
+      </div>
+      <div class="impact-note" id="impact-note">GHS 150 funds one classroom cognitive development kit for 30 pupils.</div>
+      <button class="btn btn-primary btn-full" onclick="donateNow()">Donate securely with Paystack</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <p class="section-label" style="color:var(--gold-deep); text-align:center;">Where your money goes</p>
+    <h2 class="section-title" style="text-align:center; max-width:600px; margin:0 auto 2.5rem;">What your gift makes possible</h2>
+    <div class="impact-grid">
+      <div class="impact-card"><div class="amt">GHS 50</div><p>Provides flashcards and a workbook for one child — and contributes to Foundation Support: school materials, furniture, or clothing for a child in need.</p></div>
+      <div class="impact-card"><div class="amt">GHS 150</div><p>Funds one full classroom cognitive development kit — puzzles, flashcards, and activity books for 30 pupils.</p></div>
+      <div class="impact-card"><div class="amt">GHS 500</div><p>Helps bring cognitive development resources to an entire small primary school.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--cream-deep); padding-top:4rem; padding-bottom:4rem;">
+  <div class="section-inner">
+    <p class="section-label" style="color:var(--green); text-align:center;">More ways to help</p>
+    <h2 class="section-title" style="text-align:center; max-width:600px; margin:0 auto 2.5rem;">Beyond a one-time gift</h2>
+    <div class="ways-grid">
+      <div class="way-card">
+        <div class="way-icon">🏫</div>
+        <h4>Sponsor a school kit</h4>
+        <p>Fund a classroom or a whole school directly through our School Donations programme.</p>
+        <a href="school-donations.html" class="btn btn-outline btn-full">Go to School Donations</a>
+      </div>
+      <div class="way-card">
+        <div class="way-icon">🙋</div>
+        <h4>Volunteer your time</h4>
+        <p>Help run summer school sessions, support our content team, or lend a professional skill.</p>
+        <a href="contact.html" class="btn btn-outline btn-full">Get in touch</a>
+      </div>
+      <div class="way-card">
+        <div class="way-icon">🤝</div>
+        <h4>Partner with us</h4>
+        <p>Are you a company, school, or organisation? Let's talk about a partnership that fits.</p>
+        <a href="contact.html" class="btn btn-outline btn-full">Start a conversation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <div class="transparency-box">
+      <span style="font-size:2.4rem;">🔍</span>
+      <p><strong>Our commitment to transparency:</strong> Anyoka Foundation is a registering Ghanaian NGO. As we grow, we will publish how every donated cedi is used — materials, delivery, and programme costs — with zero spent on overhead beyond what's necessary to operate.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><img src="assets/logo.png" alt="Anyoka Foundation logo"><strong>Anyoka Foundation</strong></div>
+      <p style="font-size:14px; max-width:280px; margin-bottom:1.2rem;">Where young minds catch great ideas. Tema, Greater Accra, Ghana.</p>
+      <p style="font-size:13px; color:var(--gold); font-style:italic;">Catch Potential. Change Futures.</p>
+    </div>
+    <div><h5>Explore</h5><ul><li><a href="about.html">About us</a></li><li><a href="programs.html">Programs</a></li><li><a href="resources.html">Our Resources</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+    <div><h5>Get involved</h5><ul><li><a href="donate.html">Donate</a></li><li><a href="school-donations.html">School donations</a></li><li><a href="contact.html">Volunteer</a></li><li><a href="contact.html">Partner with us</a></li></ul></div>
+    <div><h5>Contact</h5><ul><li><a href="mailto:info@anyokafoundation.org">info@anyokafoundation.org</a></li><li><a href="#">Tema, Greater Accra</a></li><li><a href="contact.html">Contact form</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Anyoka Foundation. An Anyoka Learning resource.</span>
+    <div class="footer-social"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="Facebook">FB</a><a href="#" aria-label="WhatsApp">WA</a></div>
+    <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+  </div>
+</footer>
+
+<script>
+  let selectedAmount = 150;
+  let givingType = 'once';
+
+  function selectAmount(el, amount) {
+    document.querySelectorAll('.amount-opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('custom-amount').value = '';
+    selectedAmount = amount;
+    updateImpactNote(amount);
+  }
+
+  document.getElementById('custom-amount').addEventListener('input', function() {
+    document.querySelectorAll('.amount-opt').forEach(o => o.classList.remove('selected'));
+    selectedAmount = parseInt(this.value) || 0;
+    updateImpactNote(selectedAmount);
+  });
+
+  function updateImpactNote(amount) {
+    const note = document.getElementById('impact-note');
+    if (amount >= 500) note.textContent = `GHS ${amount} helps bring cognitive development resources to an entire small school.`;
+    else if (amount >= 150) note.textContent = `GHS ${amount} funds a classroom cognitive development kit.`;
+    else if (amount >= 50) note.textContent = `GHS ${amount} provides flashcards and a workbook for a child to take home.`;
+    else note.textContent = `Every cedi helps a child catch their potential.`;
+  }
+
+  function setGiving(type, btn) {
+    document.querySelectorAll('.give-toggle button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    givingType = type;
+  }
+
+  function donateNow() {
+    alert('Paystack checkout for a ' + (givingType === 'monthly' ? 'monthly' : 'one-time') + ' donation of GHS ' + selectedAmount + ' will open here once your Paystack account is connected.');
+  }
+</script>
+
+</body>
+</html>
