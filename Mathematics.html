@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Maths Game — Anyoka Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFFDF5;
+    --cream-deep: #FBF6E9;
+    --ink: #1A1208;
+    --green: #0F6E56;
+    --green-mid: #1D9E75;
+    --green-pale: #E1F5EE;
+    --gold: #F5C842;
+    --gold-deep: #C8922A;
+    --gold-pale: #FEF9E6;
+    --orange: #F5813F;
+    --pink: #D4537E;
+    --purple: #7F77DD;
+    --gray: #6B6A63;
+    --border: rgba(26,18,8,0.10);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  a { text-decoration: none; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 200;
+    background: rgba(255,253,245,0.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border); padding: 0.9rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 10px; }
+  .nav-brand img { width: 36px; height: auto; }
+  .nav-brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+  .nav-brand-text strong { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; color: var(--green); }
+  .nav-brand-text span { font-size: 9px; letter-spacing: 0.08em; color: var(--gray); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 1.8rem; align-items: center; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); padding: 4px 0; transition: color 0.2s; }
+  .nav-links a.active { color: var(--green); font-weight: 700; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta { background: var(--green); color: white !important; padding: 9px 20px; border-radius: 100px; font-weight: 600 !important; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--green-mid); }
+
+  /* ── HERO ── */
+  .game-hero {
+    background: var(--ink);
+    color: white;
+    padding: 4rem 2rem 4.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .game-hero::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 360px; height: 360px; border-radius: 50%;
+    border: 50px solid rgba(245,200,66,0.07);
+  }
+  .game-hero::after {
+    content: '';
+    position: absolute; bottom: -40px; left: -40px;
+    width: 260px; height: 260px; border-radius: 50%;
+    border: 35px solid rgba(15,110,86,0.10);
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+  .hero-free-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold); color: var(--ink);
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 7px 18px; border-radius: 100px;
+    margin-bottom: 1.4rem;
+  }
+  .hero-free-badge::before { content: '★'; }
+  .game-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .game-hero h1 em { font-style: italic; color: var(--gold); }
+  .game-hero p {
+    font-size: 1.05rem;
+    color: rgba(255,253,245,0.72);
+    max-width: 520px;
+    margin: 0 auto 2rem;
+    line-height: 1.75;
+    font-weight: 400;
+  }
+  .hero-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .hero-badge {
+    background: rgba(255,253,245,0.08);
+    border: 1px solid rgba(255,253,245,0.15);
+    border-radius: 100px;
+    padding: 7px 16px;
+    font-size: 12.5px; color: rgba(255,253,245,0.75);
+  }
+
+  /* ── MAIN GAME AREA ── */
+  .game-wrap {
+    max-width: 840px; margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  /* ── LEVEL SELECTOR ── */
+  .level-selector { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2rem; }
+  .level-btn {
+    padding: 10px 20px; border-radius: 100px;
+    border: 1.5px solid var(--border);
+    background: white; color: var(--gray);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px; font-weight: 600;
+    cursor: pointer; transition: all 0.18s;
+  }
+  .level-btn:hover { border-color: var(--green); color: var(--green); }
+  .level-btn.active { background: var(--green); color: white; border-color: var(--green); }
+  .level-btn .lvl-badge {
+    font-size: 10px; font-family: 'DM Mono', monospace;
+    background: rgba(255,255,255,0.2); border-radius: 4px;
+    padding: 1px 5px; margin-left: 4px;
+  }
+  .level-btn:not(.active) .lvl-badge { background: rgba(15,110,86,0.08); color: var(--green); }
+
+  /* ── GAME CARD ── */
+  .game-card {
+    background: var(--ink);
+    border-radius: 24px;
+    padding: 2.2rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 20px 50px rgba(26,18,8,0.18);
+  }
+  .game-card::before {
+    content: '';
+    position: absolute; right: -20px; top: -20px;
+    width: 180px; height: 180px; border-radius: 50%;
+    border: 28px solid rgba(245,200,66,0.07);
+    pointer-events: none;
+  }
+  .game-card-inner { position: relative; z-index: 1; }
+
+  .game-level-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .game-level-label::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+
+  /* QUESTION DISPLAY */
+  .question-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 18px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    min-height: 140px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .question-text {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: white;
+    margin-bottom: 0.4rem;
+    line-height: 1.1;
+  }
+  .question-hint {
+    font-size: 12px;
+    color: rgba(255,253,245,0.3);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+    margin-top: 6px;
+  }
+
+  /* TIMER BAR */
+  .timer-wrap { margin-bottom: 1rem; }
+  .timer-bar {
+    width: 100%; height: 5px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 3px; overflow: hidden;
+  }
+  .timer-fill {
+    height: 100%; width: 100%;
+    background: var(--gold);
+    border-radius: 3px;
+    transition: width 0.1s linear;
+  }
+  .timer-text {
+    font-size: 11px; color: rgba(255,253,245,0.35);
+    font-family: 'DM Mono', monospace;
+    text-align: right; margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  /* INPUT ROW */
+  .answer-row {
+    display: flex; gap: 10px; align-items: center;
+    margin-bottom: 1rem;
+  }
+  .answer-input {
+    flex: 1;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 1.5px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+    color: white;
+    font-size: 1.4rem;
+    font-family: 'Fraunces', serif;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .answer-input:focus { border-color: var(--gold); background: rgba(255,255,255,0.09); }
+  .answer-input:disabled { opacity: 0.35; cursor: not-allowed; }
+  .answer-input::placeholder { font-size: 14px; font-family: 'DM Sans', sans-serif; color: rgba(255,253,245,0.25); }
+
+  .ctrl-btn {
+    padding: 14px 22px;
+    border-radius: 14px; border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600; font-size: 14px;
+    cursor: pointer; transition: all 0.18s;
+    white-space: nowrap;
+  }
+  .ctrl-btn-primary { background: var(--gold); color: var(--ink); }
+  .ctrl-btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .ctrl-btn-secondary { background: rgba(255,255,255,0.08); color: rgba(255,253,245,0.8); }
+  .ctrl-btn-secondary:hover { background: rgba(255,255,255,0.14); }
+
+  /* FEEDBACK */
+  .feedback-line {
+    text-align: center; font-size: 15px; font-weight: 600;
+    min-height: 24px; transition: color 0.1s;
+    letter-spacing: 0.01em;
+  }
+  .feedback-correct { color: #4AE08A; }
+  .feedback-wrong { color: #FF6B6B; }
+  .feedback-timeout { color: #FFA94D; }
+
+  /* SCORE ROW */
+  .score-row {
+    display: flex; gap: 0; flex-wrap: wrap;
+    margin-top: 1.4rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .score-item {
+    flex: 1; min-width: 70px;
+    text-align: center; padding: 0 0.5rem;
+    position: relative;
+  }
+  .score-item:not(:last-child)::after {
+    content: ''; position: absolute; right: 0; top: 15%;
+    height: 70%; width: 1px; background: rgba(255,255,255,0.08);
+  }
+  .score-num {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem; font-weight: 700;
+    color: var(--gold); line-height: 1;
+    display: block; margin-bottom: 4px;
+  }
+  .score-label {
+    font-size: 10px; color: rgba(255,253,245,0.35);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  /* ── MOTIVATIONAL BANNER ── */
+  .motivation-bar {
+    background: var(--green-pale); border-radius: 14px;
+    padding: 1.1rem 1.4rem; display: flex; gap: 12px;
+    align-items: center; font-size: 13.5px; color: #085041;
+    margin-bottom: 1.5rem;
+  }
+  .motivation-bar span:first-child { font-size: 1.5rem; flex-shrink: 0; }
+
+  /* ── LEVEL EXPLAINER CARDS ── */
+  .level-explainers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 2rem; }
+  .level-exp-card {
+    background: white; border: 1px solid var(--border); border-radius: 16px;
+    padding: 1.2rem 1.3rem; cursor: pointer;
+    transition: transform 0.18s, box-shadow 0.18s;
+    position: relative; overflow: hidden;
+  }
+  .level-exp-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(26,18,8,0.09); }
+  .level-exp-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--card-color, var(--green));
+    border-radius: 16px 16px 0 0;
+  }
+  .lec-badge {
+    font-size: 10px; font-family: 'DM Mono', monospace; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--card-color, var(--green));
+    background: var(--card-pale, var(--green-pale));
+    padding: 2px 8px; border-radius: 4px;
+    display: inline-block; margin-bottom: 6px;
+  }
+  .level-exp-card h4 { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+  .level-exp-card p { font-size: 12px; color: var(--gray); line-height: 1.55; }
+  .level-exp-card .examples { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--card-color, var(--green)); margin-top: 6px; }
+
+  /* ── FREE BADGE STRIP ── */
+  .free-strip {
+    background: var(--gold);
+    border-radius: 14px;
+    padding: 1.2rem 1.6rem;
+    display: flex; align-items: center; gap: 14px;
+    font-size: 0.92rem; color: var(--ink);
+  }
+  .free-strip span:first-child { font-size: 1.8rem; flex-shrink: 0; }
+  .free-strip strong { font-weight: 700; display: block; margin-bottom: 2px; }
+
+  /* ── END SESSION SUMMARY ── */
+  .session-summary {
+    display: none;
+    background: white; border: 1px solid var(--border);
+    border-radius: 20px; padding: 2rem;
+    text-align: center; margin-top: 1.5rem;
+  }
+  .session-summary.visible { display: block; }
+  .summary-score { font-family: 'Fraunces', serif; font-size: 3.5rem; font-weight: 700; color: var(--green); line-height: 1; }
+  .summary-label { font-size: 13px; color: var(--gray); margin-bottom: 1.5rem; }
+  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+  .summary-stat { background: var(--cream-deep); border-radius: 12px; padding: 0.9rem; }
+  .summary-stat strong { display: block; font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; color: var(--ink); }
+  .summary-stat span { font-size: 11px; color: var(--gray); font-family: 'DM Mono', monospace; }
+  .summary-btn { background: var(--green); color: white; border: none; border-radius: 100px; padding: 12px 28px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 0.5rem; transition: opacity 0.18s; }
+  .summary-btn:hover { opacity: 0.85; }
+  .star-rating { font-size: 1.8rem; margin: 0.5rem 0; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--ink); color: rgba(255,253,245,0.7); padding: 4rem 2rem 2rem; }
+  .footer-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,253,245,0.12); }
+  .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+  .footer-brand img { width: 34px; }
+  .footer-brand strong { font-family: 'Fraunces', serif; color: white; font-size: 1.1rem; }
+  footer h5 { color: white; font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  footer a { font-size: 14px; transition: color 0.2s; }
+  footer a:hover { color: var(--gold); }
+  .footer-bottom { max-width: 1180px; margin: 0 auto; padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 13px; color: rgba(255,253,245,0.5); }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .level-explainers { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 540px) {
+    .level-selector { gap: 6px; }
+    .level-btn { padding: 8px 14px; font-size: 12.5px; }
+    .question-text { font-size: 2rem; }
+    .score-row { gap: 0; }
+    .level-explainers { grid-template-columns: 1fr 1fr; }
+    .summary-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="assets/logo.png" alt="Anyoka Foundation logo">
+    <div class="nav-brand-text"><strong>Anyoka</strong><span>Foundation</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="about.html">About</a>
+    <a href="programs.html">Programs</a>
+    <a href="resources.html">Our Resources</a>
+    <a href="school-donations.html">School Donations</a>
+    <a href="blog.html">Blog</a>
+    <a href="free-games.html">Free Games</a>
+    <a href="contact.html">Contact</a>
+    <a href="donate.html" class="nav-cta">Donate</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="game-hero">
+  <div class="hero-inner">
+    <div class="hero-free-badge">Free for every child in Ghana</div>
+    <h1>Mental <em>Maths</em> Challenge</h1>
+    <p>A live brain-training drill for children ages 5–18. Select your level, press Start, and answer as fast as you can. No login. No cost. No limit.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">🧠 Builds working memory</span>
+      <span class="hero-badge">⚡ 4 skill levels</span>
+      <span class="hero-badge">🇬🇭 Made for Ghana</span>
+      <span class="hero-badge">🎯 10 second timer</span>
+    </div>
+  </div>
+</header>
+
+<div class="game-wrap">
+
+  <!-- MOTIVATION BAR -->
+  <div class="motivation-bar">
+    <span>🏆</span>
+    <div>
+      <strong style="font-weight:700;">Your brain is a muscle.</strong>
+      Every question you answer makes it stronger. Try to beat your score each time — that's the whole game.
+    </div>
+  </div>
+
+  <!-- LEVEL EXPLAINERS -->
+  <div class="level-explainers">
+    <div class="level-exp-card" style="--card-color:var(--green); --card-pale:var(--green-pale);" onclick="selectLevel(1, document.querySelectorAll('.level-btn')[0])">
+      <span class="lec-badge">Level 1</span>
+      <h4>Number Bonds</h4>
+      <p>Addition and subtraction within 20. Good for ages 5–8.</p>
+      <div class="examples">e.g. 6 + 7 = ? · 14 − 5 = ?</div>
+    </div>
+    <div class="level-exp-card" style="--card-color:var(--gold-deep); --card-pale:var(--gold-pale);" onclick="selectLevel(2, document.querySelectorAll('.level-btn')[1])">
+      <span class="lec-badge">Level 2</span>
+      <h4>Times Tables</h4>
+      <p>Multiplication and division up to 12×12. Ages 8–12.</p>
+      <div class="examples">e.g. 7 × 8 = ? · 56 ÷ 7 = ?</div>
+    </div>
+    <div class="level-exp-card" style="--card-color:var(--orange); --card-pale:#FEF0E6;" onclick="selectLevel(3, document.querySelectorAll('.level-btn')[2])">
+      <span class="lec-badge">Level 3</span>
+      <h4>Percentages</h4>
+      <p>Mental percentage calculations. Good for ages 12–15.</p>
+      <div class="examples">e.g. 25% of 80 = ? · 10% of 350 = ?</div>
+    </div>
+    <div class="level-exp-card" style="--card-color:var(--purple); --card-pale:#EEEDFE;" onclick="selectLevel(4, document.querySelectorAll('.level-btn')[3])">
+      <span class="lec-badge">Level 4</span>
+      <h4>Multi-Step</h4>
+      <p>Squares, roots, and simple algebra. Ages 15–18.</p>
+      <div class="examples">e.g. 9² = ? · √144 = ? · 3n = 24, n = ?</div>
+    </div>
+  </div>
+
+  <!-- LEVEL SELECTOR PILLS -->
+  <div class="level-selector">
+    <button class="level-btn active" onclick="selectLevel(1,this)">
+      Level 1 <span class="lvl-badge">Bonds</span>
+    </button>
+    <button class="level-btn" onclick="selectLevel(2,this)">
+      Level 2 <span class="lvl-badge">Tables</span>
+    </button>
+    <button class="level-btn" onclick="selectLevel(3,this)">
+      Level 3 <span class="lvl-badge">Percentages</span>
+    </button>
+    <button class="level-btn" onclick="selectLevel(4,this)">
+      Level 4 <span class="lvl-badge">Multi-step</span>
+    </button>
+  </div>
+
+  <!-- GAME CARD -->
+  <div class="game-card">
+    <div class="game-card-inner">
+      <div class="game-level-label" id="level-label">Level 1 — Number Bonds</div>
+
+      <div class="question-box">
+        <div class="question-text" id="drill-q">Press Start to begin</div>
+        <div class="question-hint" id="drill-hint"></div>
+      </div>
+
+      <div class="timer-wrap">
+        <div class="timer-bar"><div class="timer-fill" id="timer-fill"></div></div>
+        <div class="timer-text" id="timer-text">10 seconds per question</div>
+      </div>
+
+      <div class="answer-row">
+        <input
+          type="number"
+          inputmode="numeric"
+          class="answer-input"
+          id="drill-ans"
+          placeholder="Type your answer here"
+          onkeydown="handleKey(event)"
+          disabled
+        >
+        <button class="ctrl-btn ctrl-btn-primary" id="drill-start-btn" onclick="startDrill()">Start</button>
+        <button class="ctrl-btn ctrl-btn-secondary" onclick="skipQ()" id="drill-skip" style="display:none;">Skip</button>
+      </div>
+
+      <div class="feedback-line" id="drill-feedback"></div>
+
+      <div class="score-row">
+        <div class="score-item">
+          <span class="score-num" id="s-correct">0</span>
+          <span class="score-label">Correct</span>
+        </div>
+        <div class="score-item">
+          <span class="score-num" id="s-streak">0</span>
+          <span class="score-label">Best Streak</span>
+        </div>
+        <div class="score-item">
+          <span class="score-num" id="s-total">0</span>
+          <span class="score-label">Attempted</span>
+        </div>
+        <div class="score-item">
+          <span class="score-num" id="s-speed">—</span>
+          <span class="score-label">Avg Speed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SESSION SUMMARY (shown after stopping) -->
+  <div class="session-summary" id="session-summary">
+    <div class="star-rating" id="summary-stars">⭐⭐⭐</div>
+    <div class="summary-score" id="sum-score">—</div>
+    <div class="summary-label" id="sum-label">questions correct</div>
+    <div class="summary-grid">
+      <div class="summary-stat"><strong id="sum-accuracy">—</strong><span>Accuracy</span></div>
+      <div class="summary-stat"><strong id="sum-streak">—</strong><span>Best streak</span></div>
+      <div class="summary-stat"><strong id="sum-speed">—</strong><span>Avg speed</span></div>
+    </div>
+    <p style="font-size:13px; color:var(--gray); margin-bottom:1rem;" id="sum-message"></p>
+    <button class="summary-btn" onclick="resetGame()">Play Again →</button>
+  </div>
+
+  <!-- FREE STRIP -->
+  <div class="free-strip" style="margin-top:2.5rem;">
+    <span>🎁</span>
+    <div>
+      <strong>This game is completely free — forever.</strong>
+      It's Anyoka Foundation's gift to every child in Ghana. Share it with a friend, a classmate, or a school. No login needed. No data collected.
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><img src="assets/logo.png" alt="Anyoka Foundation logo"><strong>Anyoka Foundation</strong></div>
+      <p style="font-size:14px; max-width:280px; margin-bottom:1.2rem;">Where young minds catch great ideas. Tema, Greater Accra, Ghana.</p>
+      <p style="font-size:13px; color:var(--gold); font-style:italic;">Catch Potential. Change Futures.</p>
+    </div>
+    <div><h5>Explore</h5><ul><li><a href="about.html">About us</a></li><li><a href="programs.html">Programs</a></li><li><a href="resources.html">Our Resources</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+    <div><h5>Get involved</h5><ul><li><a href="donate.html">Donate</a></li><li><a href="school-donations.html">School donations</a></li><li><a href="contact.html">Volunteer</a></li><li><a href="free-game.html">Free game</a></li></ul></div>
+    <div><h5>Contact</h5><ul><li><a href="mailto:info@anyokafoundation.org">info@anyokafoundation.org</a></li><li><a href="#">Tema, Greater Accra</a></li><li><a href="contact.html">Contact form</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Anyoka Foundation. Free mental maths for every child in Ghana.</span>
+    <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+  </div>
+</footer>
+
+<script>
+// ── STATE ──
+let drillLevel = 1;
+let drillActive = false;
+let currentAnswer = 0;
+let correct = 0, total = 0, streak = 0, bestStreak = 0;
+let qStart = 0, totalTime = 0;
+let timerInterval = null;
+const DRILL_TIME = 10;
+
+const LEVEL_LABELS = {
+  1: 'Level 1 — Number Bonds',
+  2: 'Level 2 — Times Tables',
+  3: 'Level 3 — Percentages',
+  4: 'Level 4 — Multi-step'
+};
+
+// ── LEVEL SELECTION ──
+function selectLevel(l, btn) {
+  drillLevel = l;
+  document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.getElementById('level-label').textContent = LEVEL_LABELS[l];
+  if (drillActive) nextQ();
+}
+
+// ── QUESTION GENERATOR (from original module) ──
+function genQ() {
+  let q = '', a = 0, hint = '';
+  if (drillLevel === 1) {
+    const a1 = Math.floor(Math.random() * 9) + 1;
+    const a2 = Math.floor(Math.random() * (10 - a1)) + 1;
+    const type = Math.random() > 0.5;
+    if (type) { q = a1 + ' + ' + a2 + ' = ?'; a = a1 + a2; hint = 'Number bonds to ' + (a1+a2); }
+    else { const s = a1 + a2; q = s + ' − ' + a2 + ' = ?'; a = a1; hint = 'Subtraction to ' + s; }
+  } else if (drillLevel === 2) {
+    const m1 = Math.floor(Math.random() * 11) + 2;
+    const m2 = Math.floor(Math.random() * 11) + 2;
+    const div = Math.random() > 0.4;
+    if (div) { q = m1 + ' × ' + m2 + ' = ?'; a = m1 * m2; hint = '×' + m2 + ' table'; }
+    else { const p = m1 * m2; q = p + ' ÷ ' + m2 + ' = ?'; a = m1; hint = 'Reverse of ' + m2 + '×' + m1; }
+  } else if (drillLevel === 3) {
+    const pcts = [10, 20, 25, 50, 5, 15];
+    const p = pcts[Math.floor(Math.random() * pcts.length)];
+    const vals = [20, 40, 60, 80, 100, 120, 150, 200, 250, 300, 400];
+    const v = vals[Math.floor(Math.random() * vals.length)];
+    q = p + '% of ' + v + ' = ?';
+    a = Math.round(p / 100 * v);
+    hint = p + '% = ' + p + ' per 100';
+  } else {
+    const ops = [
+      () => { const x = Math.floor(Math.random()*8)+2, b = Math.floor(Math.random()*9)+2, c = x*b+Math.floor(Math.random()*10)+1; const res = {q:'Solve: '+b+'n + '+(c%b)+' = '+c+', n = ?', a:Math.floor(c/b), hint:'Inverse: subtract then divide'}; return res; },
+      () => { const s = (Math.floor(Math.random()*9)+2); return {q: s + '² = ?', a: s*s, hint: 'Square of ' + s}; },
+      () => { const squares = [4,9,16,25,36,49,64,81,100,121,144,169,196,225]; const sq = squares[Math.floor(Math.random()*squares.length)]; return {q: '√' + sq + ' = ?', a: Math.round(Math.sqrt(sq)), hint: 'Perfect square root'}; }
+    ];
+    const chosen = ops[Math.floor(Math.random()*ops.length)]();
+    q = chosen.q; a = chosen.a; hint = chosen.hint;
+  }
+  return { q, a, hint };
+}
+
+// ── DRILL CONTROLS ──
+function startDrill() {
+  const btn = document.getElementById('drill-start-btn');
+  if (!drillActive) {
+    drillActive = true;
+    correct = 0; total = 0; streak = 0; bestStreak = 0; totalTime = 0;
+    updateScores();
+    btn.textContent = 'Stop';
+    btn.style.background = '#FF6B6B';
+    btn.style.color = 'white';
+    document.getElementById('drill-skip').style.display = '';
+    document.getElementById('drill-ans').disabled = false;
+    document.getElementById('session-summary').classList.remove('visible');
+    nextQ();
+  } else {
+    stopDrill();
+  }
+}
+
+function stopDrill() {
+  drillActive = false;
+  clearInterval(timerInterval);
+  const btn = document.getElementById('drill-start-btn');
+  btn.textContent = 'Start';
+  btn.style.background = '';
+  btn.style.color = '';
+  document.getElementById('drill-skip').style.display = 'none';
+  document.getElementById('drill-ans').disabled = true;
+  document.getElementById('drill-q').textContent = 'Press Start to begin';
+  document.getElementById('drill-hint').textContent = '';
+  document.getElementById('timer-fill').style.width = '100%';
+  document.getElementById('timer-text').textContent = '10 seconds per question';
+  document.getElementById('drill-feedback').textContent = '';
+  document.getElementById('drill-feedback').className = 'feedback-line';
+  if (total > 0) showSummary();
+}
+
+function resetGame() {
+  document.getElementById('session-summary').classList.remove('visible');
+}
+
+function showSummary() {
+  const pct = total > 0 ? Math.round(correct / total * 100) : 0;
+  const stars = pct >= 80 ? '⭐⭐⭐' : pct >= 50 ? '⭐⭐' : '⭐';
+  const msgs = [
+    'Keep practising — every question makes your brain stronger!',
+    'Good effort! Try again to beat your score.',
+    'Great work! You\'re building a sharper mind.',
+    'Brilliant! Your mental maths is getting stronger every session.',
+  ];
+  const msgIdx = pct >= 80 ? 3 : pct >= 60 ? 2 : pct >= 40 ? 1 : 0;
+  document.getElementById('summary-stars').textContent = stars;
+  document.getElementById('sum-score').textContent = correct;
+  document.getElementById('sum-label').textContent = `correct out of ${total} questions`;
+  document.getElementById('sum-accuracy').textContent = pct + '%';
+  document.getElementById('sum-streak').textContent = bestStreak;
+  document.getElementById('sum-speed').textContent = total > 0 ? (totalTime / Math.max(correct,1)).toFixed(1) + 's' : '—';
+  document.getElementById('sum-message').textContent = msgs[msgIdx];
+  document.getElementById('session-summary').classList.add('visible');
+  document.getElementById('session-summary').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function nextQ() {
+  if (!drillActive) return;
+  clearInterval(timerInterval);
+  const { q, a, hint } = genQ();
+  currentAnswer = a;
+  document.getElementById('drill-q').textContent = q;
+  document.getElementById('drill-hint').textContent = hint;
+  document.getElementById('drill-ans').value = '';
+  document.getElementById('drill-feedback').textContent = '';
+  document.getElementById('drill-feedback').className = 'feedback-line';
+  document.getElementById('drill-ans').focus();
+  qStart = Date.now();
+  let timeLeft = DRILL_TIME;
+  document.getElementById('timer-fill').style.transition = 'none';
+  document.getElementById('timer-fill').style.width = '100%';
+  document.getElementById('timer-text').textContent = timeLeft + 's remaining';
+  setTimeout(() => {
+    document.getElementById('timer-fill').style.transition = 'width ' + DRILL_TIME + 's linear';
+    document.getElementById('timer-fill').style.width = '0%';
+  }, 50);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    document.getElementById('timer-text').textContent = timeLeft > 0 ? timeLeft + 's remaining' : 'Time\'s up!';
+    if (timeLeft <= 0) { clearInterval(timerInterval); timeOut(); }
+  }, 1000);
+}
+
+function timeOut() {
+  total++;
+  streak = 0;
+  const fb = document.getElementById('drill-feedback');
+  fb.className = 'feedback-line feedback-timeout';
+  fb.textContent = '⏰ Time! The answer was ' + currentAnswer;
+  updateScores();
+  setTimeout(nextQ, 1400);
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter') checkAnswer();
+}
+
+function checkAnswer() {
+  if (!drillActive) return;
+  const val = parseInt(document.getElementById('drill-ans').value);
+  if (isNaN(val)) return;
+  const elapsed = (Date.now() - qStart) / 1000;
+  totalTime += elapsed;
+  total++;
+  const fb = document.getElementById('drill-feedback');
+  if (val === currentAnswer) {
+    correct++;
+    streak++;
+    if (streak > bestStreak) bestStreak = streak;
+    fb.className = 'feedback-line feedback-correct';
+    fb.textContent = streak >= 3
+      ? '✓ Correct! ' + streak + ' in a row! 🔥 (' + elapsed.toFixed(1) + 's)'
+      : '✓ Correct! (' + elapsed.toFixed(1) + 's)';
+  } else {
+    streak = 0;
+    fb.className = 'feedback-line feedback-wrong';
+    fb.textContent = '✗ Not quite — the answer was ' + currentAnswer;
+  }
+  clearInterval(timerInterval);
+  updateScores();
+  setTimeout(nextQ, 1000);
+}
+
+function skipQ() {
+  total++;
+  streak = 0;
+  updateScores();
+  nextQ();
+}
+
+function updateScores() {
+  document.getElementById('s-correct').textContent = correct;
+  document.getElementById('s-streak').textContent = bestStreak;
+  document.getElementById('s-total').textContent = total;
+  document.getElementById('s-speed').textContent = total > 0
+    ? (totalTime / Math.max(correct, 1)).toFixed(1) + 's'
+    : '—';
+}
+</script>
+
+</body>
+</html>
