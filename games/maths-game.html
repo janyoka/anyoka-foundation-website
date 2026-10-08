@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Maths Game — Anyoka Foundation</title>
+<title>Free Maths Game: Anyoka Foundation</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -377,29 +377,13 @@
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-brand">
-    <img src="assets/logo.png" alt="Anyoka Foundation logo">
-    <div class="nav-brand-text"><strong>Anyoka</strong><span>Foundation</span></div>
-  </a>
-  <div class="nav-links">
-    <a href="about.html">About</a>
-    <a href="programs.html">Programs</a>
-    <a href="resources.html">Our Resources</a>
-    <a href="school-donations.html">School Donations</a>
-    <a href="blog.html">Blog</a>
-    <a href="free-games.html">Free Games</a>
-    <a href="contact.html">Contact</a>
-    <a href="donate.html" class="nav-cta">Donate</a>
-  </div>
-</nav>
 
 <!-- HERO -->
 <header class="game-hero">
   <div class="hero-inner">
     <div class="hero-free-badge">Free for every child in Ghana</div>
     <h1>Mental <em>Maths</em> Challenge</h1>
-    <p>A live brain-training drill for children ages 5–18. Select your level, press Start, and answer as fast as you can. No login. No cost. No limit.</p>
+    <p>A live brain-training drill for children ages 5 to 18. Select your level, press Start, and answer as fast as you can. No login. No cost. No limit.</p>
     <div class="hero-badges">
       <span class="hero-badge">🧠 Builds working memory</span>
       <span class="hero-badge">⚡ 4 skill levels</span>
@@ -416,7 +400,7 @@
     <span>🏆</span>
     <div>
       <strong style="font-weight:700;">Your brain is a muscle.</strong>
-      Every question you answer makes it stronger. Try to beat your score each time — that's the whole game.
+      Every question you answer makes it stronger. Try to beat your score each time, that's the whole game.
     </div>
   </div>
 
@@ -425,25 +409,25 @@
     <div class="level-exp-card" style="--card-color:var(--green); --card-pale:var(--green-pale);" onclick="selectLevel(1, document.querySelectorAll('.level-btn')[0])">
       <span class="lec-badge">Level 1</span>
       <h4>Number Bonds</h4>
-      <p>Addition and subtraction within 20. Good for ages 5–8.</p>
+      <p>Addition and subtraction within 20. Good for ages 5 to 8.</p>
       <div class="examples">e.g. 6 + 7 = ? · 14 − 5 = ?</div>
     </div>
     <div class="level-exp-card" style="--card-color:var(--gold-deep); --card-pale:var(--gold-pale);" onclick="selectLevel(2, document.querySelectorAll('.level-btn')[1])">
       <span class="lec-badge">Level 2</span>
       <h4>Times Tables</h4>
-      <p>Multiplication and division up to 12×12. Ages 8–12.</p>
+      <p>Multiplication and division up to 12×12. Ages 8 to 12.</p>
       <div class="examples">e.g. 7 × 8 = ? · 56 ÷ 7 = ?</div>
     </div>
     <div class="level-exp-card" style="--card-color:var(--orange); --card-pale:#FEF0E6;" onclick="selectLevel(3, document.querySelectorAll('.level-btn')[2])">
       <span class="lec-badge">Level 3</span>
       <h4>Percentages</h4>
-      <p>Mental percentage calculations. Good for ages 12–15.</p>
+      <p>Mental percentage calculations. Good for ages 12 to 15.</p>
       <div class="examples">e.g. 25% of 80 = ? · 10% of 350 = ?</div>
     </div>
     <div class="level-exp-card" style="--card-color:var(--purple); --card-pale:#EEEDFE;" onclick="selectLevel(4, document.querySelectorAll('.level-btn')[3])">
       <span class="lec-badge">Level 4</span>
       <h4>Multi-Step</h4>
-      <p>Squares, roots, and simple algebra. Ages 15–18.</p>
+      <p>Squares, roots, and simple algebra. Ages 15 to 18.</p>
       <div class="examples">e.g. 9² = ? · √144 = ? · 3n = 24, n = ?</div>
     </div>
   </div>
@@ -467,7 +451,7 @@
   <!-- GAME CARD -->
   <div class="game-card">
     <div class="game-card-inner">
-      <div class="game-level-label" id="level-label">Level 1 — Number Bonds</div>
+      <div class="game-level-label" id="level-label">Level 1, Number Bonds</div>
 
       <div class="question-box">
         <div class="question-text" id="drill-q">Press Start to begin</div>
@@ -509,7 +493,7 @@
           <span class="score-label">Attempted</span>
         </div>
         <div class="score-item">
-          <span class="score-num" id="s-speed">—</span>
+          <span class="score-num" id="s-speed">, </span>
           <span class="score-label">Avg Speed</span>
         </div>
       </div>
@@ -519,12 +503,12 @@
   <!-- SESSION SUMMARY (shown after stopping) -->
   <div class="session-summary" id="session-summary">
     <div class="star-rating" id="summary-stars">⭐⭐⭐</div>
-    <div class="summary-score" id="sum-score">—</div>
+    <div class="summary-score" id="sum-score">, </div>
     <div class="summary-label" id="sum-label">questions correct</div>
     <div class="summary-grid">
-      <div class="summary-stat"><strong id="sum-accuracy">—</strong><span>Accuracy</span></div>
-      <div class="summary-stat"><strong id="sum-streak">—</strong><span>Best streak</span></div>
-      <div class="summary-stat"><strong id="sum-speed">—</strong><span>Avg speed</span></div>
+      <div class="summary-stat"><strong id="sum-accuracy">, </strong><span>Accuracy</span></div>
+      <div class="summary-stat"><strong id="sum-streak">, </strong><span>Best streak</span></div>
+      <div class="summary-stat"><strong id="sum-speed">, </strong><span>Avg speed</span></div>
     </div>
     <p style="font-size:13px; color:var(--gray); margin-bottom:1rem;" id="sum-message"></p>
     <button class="summary-btn" onclick="resetGame()">Play Again →</button>
@@ -534,29 +518,13 @@
   <div class="free-strip" style="margin-top:2.5rem;">
     <span>🎁</span>
     <div>
-      <strong>This game is completely free — forever.</strong>
+      <strong>This game is completely free, forever.</strong>
       It's Anyoka Foundation's gift to every child in Ghana. Share it with a friend, a classmate, or a school. No login needed. No data collected.
     </div>
   </div>
 
 </div>
 
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-brand"><img src="assets/logo.png" alt="Anyoka Foundation logo"><strong>Anyoka Foundation</strong></div>
-      <p style="font-size:14px; max-width:280px; margin-bottom:1.2rem;">Where young minds catch great ideas. Tema, Greater Accra, Ghana.</p>
-      <p style="font-size:13px; color:var(--gold); font-style:italic;">Catch Potential. Change Futures.</p>
-    </div>
-    <div><h5>Explore</h5><ul><li><a href="about.html">About us</a></li><li><a href="programs.html">Programs</a></li><li><a href="resources.html">Our Resources</a></li><li><a href="blog.html">Blog</a></li></ul></div>
-    <div><h5>Get involved</h5><ul><li><a href="donate.html">Donate</a></li><li><a href="school-donations.html">School donations</a></li><li><a href="contact.html">Volunteer</a></li><li><a href="free-game.html">Free game</a></li></ul></div>
-    <div><h5>Contact</h5><ul><li><a href="mailto:info@anyokafoundation.org">info@anyokafoundation.org</a></li><li><a href="#">Tema, Greater Accra</a></li><li><a href="contact.html">Contact form</a></li></ul></div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2025 Anyoka Foundation. Free mental maths for every child in Ghana.</span>
-    <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
-  </div>
-</footer>
 
 <script>
 // ── STATE ──
@@ -569,10 +537,10 @@ let timerInterval = null;
 const DRILL_TIME = 10;
 
 const LEVEL_LABELS = {
-  1: 'Level 1 — Number Bonds',
-  2: 'Level 2 — Times Tables',
-  3: 'Level 3 — Percentages',
-  4: 'Level 4 — Multi-step'
+  1: 'Level 1, Number Bonds',
+  2: 'Level 2, Times Tables',
+  3: 'Level 3, Percentages',
+  4: 'Level 4, Multi-step'
 };
 
 // ── LEVEL SELECTION ──
@@ -664,7 +632,7 @@ function showSummary() {
   const pct = total > 0 ? Math.round(correct / total * 100) : 0;
   const stars = pct >= 80 ? '⭐⭐⭐' : pct >= 50 ? '⭐⭐' : '⭐';
   const msgs = [
-    'Keep practising — every question makes your brain stronger!',
+    'Keep practising, every question makes your brain stronger!',
     'Good effort! Try again to beat your score.',
     'Great work! You\'re building a sharper mind.',
     'Brilliant! Your mental maths is getting stronger every session.',
@@ -675,7 +643,7 @@ function showSummary() {
   document.getElementById('sum-label').textContent = `correct out of ${total} questions`;
   document.getElementById('sum-accuracy').textContent = pct + '%';
   document.getElementById('sum-streak').textContent = bestStreak;
-  document.getElementById('sum-speed').textContent = total > 0 ? (totalTime / Math.max(correct,1)).toFixed(1) + 's' : '—';
+  document.getElementById('sum-speed').textContent = total > 0 ? (totalTime / Math.max(correct,1)).toFixed(1) + 's' : ', ';
   document.getElementById('sum-message').textContent = msgs[msgIdx];
   document.getElementById('session-summary').classList.add('visible');
   document.getElementById('session-summary').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -741,7 +709,7 @@ function checkAnswer() {
   } else {
     streak = 0;
     fb.className = 'feedback-line feedback-wrong';
-    fb.textContent = '✗ Not quite — the answer was ' + currentAnswer;
+    fb.textContent = '✗ Not quite, the answer was ' + currentAnswer;
   }
   clearInterval(timerInterval);
   updateScores();
@@ -761,7 +729,7 @@ function updateScores() {
   document.getElementById('s-total').textContent = total;
   document.getElementById('s-speed').textContent = total > 0
     ? (totalTime / Math.max(correct, 1)).toFixed(1) + 's'
-    : '—';
+    : ', ';
 }
 </script>
 

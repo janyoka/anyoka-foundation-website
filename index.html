@@ -1,632 +1,828 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anyoka Foundation — Catch Potential. Change Futures.</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cream: #FFFDF5;
-    --cream-deep: #FBF6E9;
-    --ink: #1A1208;
-    --green: #0F6E56;
-    --green-mid: #1D9E75;
-    --green-pale: #E1F5EE;
-    --gold: #F5C842;
-    --gold-deep: #C8922A;
-    --orange: #F5813F;
-    --pink: #D4537E;
-    --purple: #7F77DD;
-    --blue: #378ADD;
-    --gray: #6B6A63;
-    --border: rgba(26,18,8,0.10);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-  a { text-decoration: none; color: inherit; }
-  img { display: block; max-width: 100%; }
-  .serif { font-family: 'Fraunces', serif; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anyoka Foundation — Where Young Minds Catch Great Ideas</title>
+  <meta name="description" content="Anyoka Foundation is a Ghanaian NGO working to build cognitive development tools for children ages 1 to 24, based in Tema, Greater Accra.">
+  <meta property="og:title" content="Anyoka Foundation">
+  <meta property="og:description" content="Where Young Minds Catch Great Ideas. Based in Tema, Ghana.">
+  <meta property="og:image" content="assets/logo.png">
+  <link rel="icon" type="image/png" href="assets/logo.png">
 
-  nav {
-    position: sticky; top: 0; z-index: 200;
-    background: rgba(255,253,245,0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-    padding: 0.9rem 2rem;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .nav-brand { display: flex; align-items: center; gap: 10px; }
-  .nav-brand img { width: 36px; height: auto; }
-  .nav-brand-text { display: flex; flex-direction: column; line-height: 1.1; }
-  .nav-brand-text strong { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; color: var(--green); }
-  .nav-brand-text span { font-size: 9px; letter-spacing: 0.08em; color: var(--gray); text-transform: uppercase; }
-  .nav-links { display: flex; gap: 1.8rem; align-items: center; }
-  .nav-links a {
-    font-size: 14px; font-weight: 500; color: var(--ink);
-    position: relative; padding: 4px 0;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--green); }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
-    background: var(--gold); transition: width 0.25s;
-  }
-  .nav-links a:hover::after { width: 100%; }
-  .nav-cta {
-    background: var(--green); color: white !important;
-    padding: 9px 20px; border-radius: 100px; font-weight: 600 !important;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .nav-cta:hover { background: var(--green-mid); transform: translateY(-1px); }
-  .nav-cta::after { display: none; }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
-  .hero {
-    position: relative;
-    padding: 5rem 2rem 6rem;
-    overflow: hidden;
-    background: var(--cream);
-  }
-  .hero-grid {
-    max-width: 1180px; margin: 0 auto;
-    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem;
-    align-items: center;
-  }
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--green); background: var(--green-pale);
-    padding: 7px 16px; border-radius: 100px;
-    margin-bottom: 1.5rem;
-  }
-  .hero h1 {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    font-weight: 600;
-    line-height: 1.08;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 1.4rem;
-  }
-  .hero h1 .catch-word {
-    color: var(--green);
-    font-style: italic;
-    font-weight: 600;
-  }
-  .hero-sub {
-    font-size: 1.1rem;
-    color: var(--gray);
-    max-width: 480px;
-    margin-bottom: 2.2rem;
-    line-height: 1.7;
-  }
-  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 14px 28px; border-radius: 100px;
-    font-weight: 600; font-size: 15px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: none; cursor: pointer;
-  }
-  .btn-primary { background: var(--green); color: white; }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,110,86,0.25); }
-  .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
-  .btn-outline:hover { background: var(--ink); color: var(--cream); }
-  .btn-gold { background: var(--gold); color: var(--ink); box-shadow: 0 4px 14px rgba(0,0,0,0.18); }
-  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.24); }
+  <!-- Design tokens -->
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="mobile.css">
 
-  .hero-stats { display: flex; gap: 2.2rem; flex-wrap: wrap; }
-  .hero-stat strong {
-    display: block; font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 600; color: var(--green);
-  }
-  .hero-stat span { font-size: 12.5px; color: var(--gray); }
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; }
+    a { color: var(--green); }
+    a:hover { color: var(--green-mid); }
+    img { max-width: 100%; }
+  </style>
 
-  .hero-visual {
-    position: relative; display: flex; align-items: center; justify-content: center;
-    aspect-ratio: 1/1;
-  }
-  .hero-blob {
-    position: absolute; width: 100%; height: 100%;
-    background: var(--green-pale);
-    border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
-    z-index: 0;
-  }
-  .hero-logo-card {
-    position: relative; z-index: 2;
-    background: white; border-radius: 24px;
-    padding: 2.4rem 2.6rem;
-    box-shadow: 0 20px 50px rgba(26,18,8,0.10);
-    display: flex; flex-direction: column; align-items: center; text-align: center;
-    max-width: 280px;
-  }
-  .hero-logo-card img { width: 110px; margin-bottom: 1rem; }
-  .hero-logo-card .tagline { font-family: 'Fraunces', serif; font-style: italic; font-size: 1rem; color: var(--green); font-weight: 500; }
-  .catch-arc { position: absolute; z-index: 1; pointer-events: none; }
-  .float-star { position: absolute; z-index: 3; animation: floaty 3.5s ease-in-out infinite; }
-  @keyframes floaty {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  section { padding: 5.5rem 2rem; }
-  .section-inner { max-width: 1180px; margin: 0 auto; }
-  .section-label {
-    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--gold-deep); margin-bottom: 0.8rem;
-  }
-  .section-title {
-    font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-    font-weight: 600; line-height: 1.15; max-width: 640px; margin-bottom: 1rem;
-  }
-  .section-desc { font-size: 1.05rem; color: var(--gray); max-width: 560px; line-height: 1.7; }
-  .section-head { margin-bottom: 3rem; }
-  .section-head.center { text-align: center; margin-left: auto; margin-right: auto; }
-  .section-head.center .section-title,
-  .section-head.center .section-desc { margin-left: auto; margin-right: auto; }
-
-  .meaning { background: var(--ink); color: var(--cream); position: relative; overflow: hidden; }
-  .meaning::before {
-    content: ''; position: absolute; top: -20%; right: -10%;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(245,200,66,0.15) 0%, transparent 70%);
-  }
-  .meaning-inner { max-width: 800px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
-  .meaning-word { font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 600; margin-bottom: 1.2rem; }
-  .meaning-word .catch { color: var(--gold); font-style: italic; }
-  .meaning p { font-size: 1.15rem; color: rgba(255,253,245,0.78); line-height: 1.8; max-width: 620px; margin: 0 auto; }
-  .catch-words { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 2.2rem; }
-  .catch-words span {
-    font-size: 13px; font-weight: 600; letter-spacing: 0.03em;
-    border: 1px solid rgba(245,200,66,0.4); color: var(--gold);
-    padding: 8px 18px; border-radius: 100px;
-  }
-
-  /* TRUST BAND */
-  .trust-band { background: var(--cream-deep); padding: 2.6rem 2rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .trust-inner { max-width: 1180px; margin: 0 auto; }
-  .trust-label { text-align: center; font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 1.6rem; }
-  .trust-row { display: flex; justify-content: center; align-items: stretch; gap: 0; flex-wrap: wrap; }
-  .trust-item { display: flex; align-items: center; gap: 12px; padding: 0 2.2rem; position: relative; }
-  .trust-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 10%; bottom: 10%; width: 1px; background: var(--border); }
-  .trust-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--green-pale); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-  .trust-item strong { display: block; font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
-  .trust-item span { font-size: 12px; color: var(--gray); }
-  @media (max-width: 900px) {
-    .trust-item { padding: 0.6rem 1.4rem; }
-    .trust-item:not(:last-child)::after { display: none; }
-  }
-
-  .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
-  .program-card {
-    background: white; border-radius: 20px; padding: 2.2rem;
-    border: 1px solid var(--border);
-    transition: transform 0.25s, box-shadow 0.25s;
-    display: flex; flex-direction: column; gap: 1rem;
-  }
-  .program-card:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(26,18,8,0.08); }
-  .program-icon {
-    width: 52px; height: 52px; border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
-  }
-  .program-card h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 600; }
-  .program-card p { color: var(--gray); font-size: 0.95rem; flex: 1; }
-  .program-link { font-size: 13.5px; font-weight: 700; color: var(--green); display: inline-flex; align-items: center; gap: 5px; transition: gap 0.2s; }
-  .program-card:hover .program-link { gap: 8px; }
-
-  .shop-section { background: var(--cream-deep); }
-  .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; }
-  .product-card { background: white; border-radius: 18px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.25s, box-shadow 0.25s; }
-  .product-card:hover { transform: translateY(-5px); box-shadow: 0 14px 28px rgba(26,18,8,0.09); }
-  .product-thumb { aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-  .product-thumb .tag {
-    position: absolute; top: 10px; left: 10px;
-    background: rgba(255,255,255,0.92); color: var(--ink);
-    font-size: 10.5px; font-weight: 700; padding: 4px 10px; border-radius: 100px;
-  }
-  .product-body { padding: 1.1rem 1.2rem 1.3rem; }
-  .product-body h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
-  .product-body .price { font-size: 0.85rem; color: var(--green); font-weight: 700; }
-  .product-body .age { font-size: 0.78rem; color: var(--gray); margin-bottom: 6px; display: block; }
-
-  .dream {
-    background: linear-gradient(135deg, var(--green) 0%, #0A5242 100%);
-    color: white; border-radius: 32px;
-    padding: 4.5rem 3rem;
-    position: relative; overflow: hidden;
-  }
-  .dream::after {
-    content: ''; position: absolute; bottom: -30%; left: -10%;
-    width: 400px; height: 400px; border-radius: 50%;
-    background: rgba(245,200,66,0.10);
-  }
-  .dream-inner { max-width: 680px; position: relative; z-index: 1; }
-  .dream .section-label { color: var(--gold); }
-  .dream h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 600; margin-bottom: 1.2rem; }
-  .dream p { color: rgba(255,253,245,0.85); font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem; }
-
-  .school-teaser { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-  .school-visual { background: var(--green-pale); border-radius: 24px; padding: 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
-  .stat-row { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 1rem; border-bottom: 1px solid rgba(15,110,86,0.15); }
-  .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .stat-row strong { font-family: 'Fraunces', serif; font-size: 2rem; color: var(--green); }
-  .stat-row span { font-size: 13px; color: var(--gray); text-align: right; max-width: 160px; }
-
-  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
-  .blog-card { background: white; border-radius: 18px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.25s; display:block; }
-  .blog-card:hover { transform: translateY(-5px); }
-  .blog-thumb { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
-  .blog-body { padding: 1.4rem; }
-  .blog-cat { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-deep); margin-bottom: 8px; display: block; }
-  .blog-body h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; line-height: 1.35; }
-  .blog-body p { font-size: 0.88rem; color: var(--gray); }
-
-  .newsletter {
-    background: var(--gold); border-radius: 28px;
-    padding: 3.5rem 3rem;
-    display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
-  }
-  .newsletter h3 { font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
-  .newsletter p { color: rgba(26,18,8,0.7); font-size: 0.95rem; }
-  .newsletter-form { display: flex; gap: 10px; }
-  .newsletter-form input { padding: 13px 18px; border-radius: 100px; border: none; min-width: 260px; font-family: 'DM Sans', sans-serif; font-size: 14px; }
-  .newsletter-form button { background: var(--ink); color: white; border: none; padding: 13px 26px; border-radius: 100px; font-weight: 600; cursor: pointer; transition: transform 0.2s; }
-  .newsletter-form button:hover { transform: translateY(-2px); }
-
-  footer { background: var(--ink); color: rgba(255,253,245,0.7); padding: 4rem 2rem 2rem; margin-top: 5rem; }
-  .footer-grid {
-    max-width: 1180px; margin: 0 auto;
-    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem;
-    padding-bottom: 3rem; border-bottom: 1px solid rgba(255,253,245,0.12);
-  }
-  .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
-  .footer-brand img { width: 34px; }
-  .footer-brand strong { font-family: 'Fraunces', serif; color: white; font-size: 1.1rem; }
-  footer h5 { color: white; font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; }
-  footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
-  footer a { font-size: 14px; transition: color 0.2s; }
-  footer a:hover { color: var(--gold); }
-  .footer-bottom {
-    max-width: 1180px; margin: 0 auto; padding-top: 2rem;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
-    font-size: 13px; color: rgba(255,253,245,0.5);
-  }
-  .footer-social { display: flex; gap: 14px; }
-  .footer-social a {
-    width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,253,245,0.2);
-    display: flex; align-items: center; justify-content: center; font-size: 11px;
-  }
-
-  @media (max-width: 900px) {
-    .nav-links { display: none; }
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-visual { max-width: 360px; margin: 0 auto; }
-    .programs-grid { grid-template-columns: 1fr; }
-    .product-grid { grid-template-columns: repeat(2, 1fr); }
-    .school-teaser { grid-template-columns: 1fr; }
-    .blog-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-    .newsletter { flex-direction: column; align-items: flex-start; }
-  }
-</style>
+  <!-- React -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin></script>
+  <!-- Design System bundle -->
+  <script src="ds_bundle.js"></script>
 </head>
 <body>
+  <div id="root"></div>
 
-<nav>
-  <a href="index.html" class="nav-brand">
-    <img src="assets/logo.png" alt="Anyoka Foundation logo">
-    <div class="nav-brand-text">
-      <strong>Anyoka</strong>
-      <span>Foundation</span>
-    </div>
-  </a>
-  <div class="nav-links">
-    <a href="about.html">About</a>
-    <a href="programs.html">Programs</a>
-    <a href="resources.html">Our Resources</a>
-    <a href="school-donations.html">School Donations</a>
-    <a href="blog.html">Blog</a>
-    <a href="contact.html">Contact</a>
-    <a href="donate.html" class="nav-cta">Donate</a>
-  </div>
-</nav>
+  <script type="text/babel">
+  // =====================
+  // SITE NAV BAR
+  // =====================
+  const { Button } = window.AnyokaFoundationDesignSystem_a7532e;
 
-<header class="hero">
-  <div class="hero-grid">
-    <div class="hero-copy">
-      <span class="hero-eyebrow">Tema, Greater Accra, Ghana</span>
-      <h1>Every child deserves to <span class="catch-word">catch</span> their potential.</h1>
-      <p class="hero-sub">"Why do some children seem to think faster, solve problems easier, and learn with more confidence?" It usually isn't talent — it's whether their brain was given the chance to develop early. Anyoka Foundation builds the tools that give every Ghanaian child that chance, from birth to age 24.</p>
-      <div class="hero-actions">
-        <a href="resources.html" class="btn btn-primary">Explore our resources</a>
-        <a href="donate.html" class="btn btn-outline">Support our mission</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-blob"></div>
-      <svg class="catch-arc" width="420" height="420" viewBox="0 0 420 420" style="top:-10%;left:-8%;">
-        <path d="M40,340 Q140,40 380,70" fill="none" stroke="#C8922A" stroke-width="2.5" stroke-dasharray="2 10" stroke-linecap="round" opacity="0.55"/>
-      </svg>
-      <div class="float-star" style="top:8%; right:10%;">
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="#F5C842"><path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"/></svg>
-      </div>
-      <div class="float-star" style="bottom:14%; left:4%; animation-delay: 1.2s;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#D4537E"><path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"/></svg>
-      </div>
-      <div class="hero-logo-card">
-        <img src="assets/logo.png" alt="Anyoka Foundation brain and hand logo">
-        <span class="tagline">"Catch Potential.<br>Change Futures."</span>
-      </div>
-    </div>
-  </div>
-</header>
+  const LINKS = ['About', 'Programs', 'Our Resources', 'School Donations', 'Blog', { label: 'Games', items: ['Free Games', 'Anyoka Play'] }, 'Contact'];
 
-<div class="trust-band">
-  <div class="trust-inner">
-    <p class="trust-label">Where we stand today</p>
-    <div class="trust-row">
-      <div class="trust-item">
-        <div class="trust-icon">📍</div>
-        <div><strong>Founded 2025</strong><span>Tema, Greater Accra, Ghana</span></div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">📚</div>
-        <div><strong>6 products live</strong><span>Anyoka Learning catalogue</span></div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">⚖️</div>
-        <div><strong>Registering</strong><span>As a Ghanaian NGO</span></div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">🔍</div>
-        <div><strong>100% transparent</strong><span>On how funds are used</span></div>
-      </div>
-    </div>
-  </div>
-</div>
+  function SiteNavBar({ links = LINKS, active, onNavigate, logoSrc = 'assets/logo.png', sticky = true }) {
+    const [hov, setHov] = React.useState(null);
+    const [open, setOpen] = React.useState(null);
+    const [menu, setMenu] = React.useState(false);
+    const goTo = (s) => { setMenu(false); onNavigate && onNavigate(s); };
+    const flat = links.flatMap((raw) => typeof raw === 'string' ? [raw] : (raw.items && raw.items.length ? raw.items : [raw.label]));
+    const closeTimer = React.useRef(null);
+    const enter = (k) => { clearTimeout(closeTimer.current); setOpen(k); };
+    const leave = () => { closeTimer.current = setTimeout(() => setOpen(null), 160); };
+    const linkStyle = (isActive, isHov) => ({
+      fontSize: 14, fontWeight: isActive ? 700 : 500, textDecoration: 'none',
+      color: isActive || isHov ? 'var(--green)' : 'var(--ink)',
+      position: 'relative', padding: '4px 0', transition: 'color 0.2s', whiteSpace: 'nowrap',
+      display: 'flex', alignItems: 'center', gap: 5, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit',
+    });
+    return (
+      <nav style={{
+        position: sticky ? 'sticky' : 'static', top: 0, zIndex: 200,
+        background: 'var(--nav-bg)', backdropFilter: 'var(--nav-blur)', WebkitBackdropFilter: 'var(--nav-blur)',
+        borderBottom: '1px solid var(--border)', padding: '0.9rem 2rem',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontFamily: 'var(--font-sans)',
+      }}>
+        <style>{'.ank-burger{display:none}@media (max-width:900px){.ank-links{display:none!important}.ank-burger{display:flex!important}}@media (max-width:480px){.ank-nav-pad{padding:0.75rem 1rem!important}}'}</style>
+        <a href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('Home'); }} style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+          <img src={logoSrc} alt="Anyoka Foundation logo" style={{ width: 36, height: 'auto', display: 'block' }} />
+          <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.1 }}>
+            <strong style={{ fontFamily: 'var(--font-serif-display)', fontSize: 16, fontWeight: 600, color: 'var(--green)' }}>Anyoka</strong>
+            <span style={{ fontSize: 9, letterSpacing: '0.08em', color: 'var(--gray)', textTransform: 'uppercase' }}>Foundation</span>
+          </span>
+        </a>
+        <button type="button" className="ank-burger" aria-label={menu ? 'Close menu' : 'Open menu'} aria-expanded={menu} onClick={() => setMenu(!menu)}
+          style={{ width: 44, height: 44, alignItems: 'center', justifyContent: 'center', background: 'none', border: '1px solid var(--border)', borderRadius: 12, cursor: 'pointer', color: 'var(--green)' }}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">{menu ? <path d="M4 4l12 12M16 4L4 16"/> : <path d="M3 6h14M3 10h14M3 14h14"/>}</svg>
+        </button>
+        {menu && (
+          <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, background: 'var(--cream)', borderBottom: '1px solid var(--border)', boxShadow: '0 14px 30px rgba(31,29,24,0.12)', padding: '0.6rem 1rem 1.2rem', display: 'flex', flexDirection: 'column', gap: 2, maxHeight: 'calc(100vh - 70px)', overflowY: 'auto' }}>
+            {flat.map((item) => (
+              <a key={item} href="#" onClick={(e) => { e.preventDefault(); goTo(item); }}
+                style={{ fontSize: 16, fontWeight: active === item ? 700 : 500, textDecoration: 'none', color: active === item ? 'var(--green)' : 'var(--ink)', padding: '12px 10px', borderRadius: 10, background: active === item ? 'var(--green-pale)' : 'transparent', minHeight: 44, boxSizing: 'border-box', display: 'flex', alignItems: 'center' }}>{item}</a>
+            ))}
+            <a href="#" onClick={(e) => { e.preventDefault(); goTo('Donate'); }} style={{ marginTop: '0.6rem', minHeight: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--green)', color: '#fff', fontWeight: 700, fontSize: 16, textDecoration: 'none', borderRadius: 'var(--radius-pill)' }}>Donate</a>
+          </div>
+        )}
+        <div className="ank-links" style={{ display: 'flex', gap: '1.8rem', alignItems: 'center' }}>
+          {links.map((raw) => {
+            const l = typeof raw === 'string' ? { label: raw } : raw;
+            const isGroup = l.items && l.items.length;
+            const isActive = isGroup ? l.items.includes(active) : active === l.label;
+            const isHov = hov === l.label || open === l.label;
+            if (!isGroup) {
+              return (
+                <a key={l.label} href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate(l.label); }}
+                  onMouseEnter={() => setHov(l.label)} onMouseLeave={() => setHov(null)} style={linkStyle(isActive, isHov)}>
+                  {l.label}
+                  <span style={{ position: 'absolute', bottom: 0, left: 0, height: 2, background: 'var(--gold)', transition: 'width 0.25s', width: isHov ? '100%' : 0 }}></span>
+                </a>
+              );
+            }
+            return (
+              <div key={l.label} style={{ position: 'relative' }} onMouseEnter={() => enter(l.label)} onMouseLeave={leave}>
+                <button type="button" onClick={() => setOpen(open === l.label ? null : l.label)} style={linkStyle(isActive, isHov)}>
+                  {l.label}
+                  <svg width="9" height="6" viewBox="0 0 10 6" fill="none" style={{ transform: open === l.label ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}><path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  <span style={{ position: 'absolute', bottom: 0, left: 0, height: 2, background: 'var(--gold)', transition: 'width 0.25s', width: isHov ? '100%' : 0 }}></span>
+                </button>
+                {open === l.label && (
+                  <div style={{ position: 'absolute', top: 'calc(100% + 12px)', left: '50%', transform: 'translateX(-50%)', background: '#fff', border: '1px solid var(--border)', borderRadius: 14, boxShadow: '0 14px 34px rgba(31,29,24,0.13)', padding: 6, minWidth: 172, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    {l.items.map((item) => (
+                      <a key={item} href="#" onClick={(e) => { e.preventDefault(); setOpen(null); onNavigate && onNavigate(item); }}
+                        onMouseEnter={() => setHov(item)} onMouseLeave={() => setHov(null)}
+                        style={{ fontSize: 13.5, fontWeight: active === item ? 700 : 500, textDecoration: 'none', color: active === item ? 'var(--green)' : 'var(--ink)', padding: '9px 12px', borderRadius: 9, background: hov === item ? 'var(--green-pale)' : 'transparent', whiteSpace: 'nowrap', transition: 'background 0.15s, color 0.15s' }}>
+                        {item}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+          <Button variant="nav" href="#" onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('Donate'); }}>Donate</Button>
+        </div>
+      </nav>
+    );
+  }
 
-<section class="meaning">
-  <div class="section-inner meaning-inner">
-    <p class="section-label" style="color:var(--gold); text-align:center;">What we believe</p>
-    <h2 class="meaning-word">Anyoka means <span class="catch">"to catch."</span></h2>
-    <p>Our mission is to help children catch opportunities, catch knowledge, catch confidence, and catch their full potential — because a child who is never given the tools to think critically often can't catch the chances placed in front of them.</p>
-    <div class="catch-words">
-      <span>Catch opportunities</span>
-      <span>Catch knowledge</span>
-      <span>Catch confidence</span>
-      <span>Catch potential</span>
-    </div>
-  </div>
-</section>
+  // =====================
+  // HOME SCREEN
+  // =====================
+  const DS = window.AnyokaFoundationDesignSystem_a7532e;
+  const { Button: HBtn, Badge, SectionHead, ProgramCard, ProductCard, BlogCard, StatRow, NewsletterBand } = DS;
 
-<section>
-  <div class="section-inner">
-    <div class="section-head center">
-      <p class="section-label">What we do</p>
-      <h2 class="section-title">Three ways we build brighter minds</h2>
-      <p class="section-desc">From everyday games to a future campus, every Anyoka programme is designed around one idea: cognitive development should start early, and should belong to every child.</p>
-    </div>
-    <div class="programs-grid">
-      <div class="program-card">
-        <div class="program-icon" style="background:var(--green-pale); color:var(--green);">🧩</div>
-        <h3>Cognitive Development Games</h3>
-        <p>Purposefully designed games and digital resources that build memory, attention, problem-solving, and creative thinking — for ages 0 to 24.</p>
-        <a href="programs.html#games" class="program-link">Explore the games →</a>
-      </div>
-      <div class="program-card">
-        <div class="program-icon" style="background:#FEF0E6; color:var(--orange);">🏫</div>
-        <h3>Cognitive Summer School</h3>
-        <p>An immersive holiday programme where every activity — from play to structured learning — is rooted in building cognitive strength.</p>
-        <a href="programs.html#summer-school" class="program-link">See the programme →</a>
-      </div>
-      <div class="program-card">
-        <div class="program-icon" style="background:#EEEDFE; color:var(--purple);">🏗️</div>
-        <h3>Educational Complex</h3>
-        <p>Our flagship future project: Ghana's first dedicated cognitive development educational complex, serving ages 1 to 24, right here in Tema.</p>
-        <a href="programs.html#complex" class="program-link">Read our big dream →</a>
-      </div>
-    </div>
-  </div>
-</section>
+  const Sparkle = ({ size = 34, fill = '#F5C842', style }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={fill} style={style}><path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"/></svg>
+  );
 
-<section class="shop-section">
-  <div class="section-inner">
-    <div class="section-head" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem;">
+  const Section = ({ bg, style, children }) => (
+    <section style={{ padding: '5.5rem 2rem', background: bg, ...style }}>
+      <div style={{ maxWidth: 'var(--content-max)', margin: '0 auto' }}>{children}</div>
+    </section>
+  );
+
+  const GLYPHS = {
+    plus: <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" strokeWidth="1.5"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg>,
+    grid: <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" strokeWidth="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>,
+    quads: <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" strokeWidth="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>,
+    card: <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" strokeWidth="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>,
+  };
+
+  function HomeScreen({ go }) {
+    return (
       <div>
-        <p class="section-label">Anyoka Learning — browse & buy at anyokalearning.com</p>
-        <h2 class="section-title" style="margin-bottom:0;">"What can I actually do at home, today?"</h2>
-        <p style="color:var(--gray); font-size:0.98rem; margin-top:0.6rem; max-width:480px;">That's the question every parent asks us. These six resources are our answer — practical, affordable, and available now on Anyoka Learning.</p>
+        <header style={{ position: 'relative', minHeight: 560, overflow: 'hidden', background: 'var(--cream)', display: 'flex', alignItems: 'center' }}>
+          <img src="assets/hero-children.jpg" alt="Ghanaian children playing cognitive development games" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(255,253,245,0.95) 0%, rgba(255,253,245,0.84) 28%, rgba(255,253,245,0) 58%)' }}></div>
+          <div style={{ position: 'relative', zIndex: 2, maxWidth: 'var(--content-max)', margin: '0 auto', width: '100%', padding: '5rem 2rem' }}>
+            <div style={{ maxWidth: 560 }}>
+              <div style={{ marginBottom: '1.5rem' }}><Badge>Tema, Greater Accra, Ghana</Badge></div>
+              <h1 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'var(--text-hero)', fontWeight: 600, lineHeight: 1.08, letterSpacing: '-0.01em', color: 'var(--ink)', margin: '0 0 1.4rem' }}>
+                Every child deserves to <span style={{ color: 'var(--green)', fontStyle: 'italic' }}>catch</span> their potential.
+              </h1>
+              <p style={{ fontSize: '1.1rem', color: '#4A4438', maxWidth: 480, margin: '0 0 2.2rem', lineHeight: 1.7 }}>
+                "Why do some children seem to think faster, solve problems easier, and learn with more confidence?" It usually isn't talent — it's whether their brain was given the chance to develop early. Anyoka Foundation builds the tools that give every Ghanaian child that chance, from birth to age 24.
+              </p>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <HBtn onClick={() => go('Our Resources')}>Explore our resources</HBtn>
+                <HBtn variant="outline" style={{ background: 'rgba(255,253,245,0.85)' }} onClick={() => go('Donate')}>Support our mission</HBtn>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div style={{ background: 'var(--cream-deep)', padding: '2.6rem 2rem', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+          <div style={{ maxWidth: 'var(--content-max)', margin: '0 auto' }}>
+            <p style={{ textAlign: 'center', fontSize: '11.5px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--gray)', margin: '0 0 1.6rem' }}>Where we stand today</p>
+            <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+              {[['📍', 'Founded 2025', 'Tema, Greater Accra, Ghana'], ['📚', '6 products live', 'Anyoka Learning catalogue'], ['⚖️', 'Registering', 'As a Ghanaian NGO'], ['🔍', '100% transparent', 'On how funds are used']].map(([ic, t, s], i, arr) => (
+                <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '0 2.2rem', borderRight: i < arr.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                  <div style={{ width: 38, height: 38, borderRadius: 10, background: 'var(--green-pale)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem' }}>{ic}</div>
+                  <div><strong style={{ display: 'block', fontFamily: 'var(--font-serif-display)', fontSize: '1.1rem', fontWeight: 600, color: 'var(--ink)', lineHeight: 1.2 }}>{t}</strong><span style={{ fontSize: 12, color: 'var(--gray)' }}>{s}</span></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <section style={{ padding: '5.5rem 2rem', background: 'var(--ink)', color: 'var(--cream)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: '-20%', right: '-10%', width: 500, height: 500, background: 'radial-gradient(circle, rgba(245,200,66,0.15) 0%, transparent 70%)' }}></div>
+          <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center', position: 'relative' }}>
+            <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--gold)', margin: '0 0 0.8rem' }}>What we believe</p>
+            <h2 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'clamp(2.2rem, 6vw, 4rem)', fontWeight: 600, margin: '0 0 1.2rem' }}>Anyoka means <span style={{ color: 'var(--gold)', fontStyle: 'italic' }}>"to catch."</span></h2>
+            <p style={{ fontSize: '1.15rem', color: 'rgba(255,253,245,0.78)', lineHeight: 1.8, maxWidth: 620, margin: '0 auto' }}>Our mission is to help children catch opportunities, catch knowledge, catch confidence, and catch their full potential — because a child who is never given the tools to think critically often can't catch the chances placed in front of them.</p>
+            <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginTop: '2.2rem' }}>
+              {['Catch opportunities', 'Catch knowledge', 'Catch confidence', 'Catch potential'].map((c) => <Badge key={c} tone="gold" style={{ letterSpacing: '0.03em', textTransform: 'none', fontSize: 13, padding: '8px 18px' }}>{c}</Badge>)}
+            </div>
+          </div>
+        </section>
+        <Section>
+          <SectionHead center label="What we do" title="Three ways we build brighter minds"
+            desc="From everyday games to a future campus, every Anyoka programme is designed around one idea: cognitive development should start early, and should belong to every child." />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.6rem' }}>
+            <ProgramCard icon="🧩" title="Cognitive Development Games" linkLabel="Explore the games" onClick={() => go('Programs')}>Purposefully designed games and digital resources that build memory, attention, problem-solving, and creative thinking — for ages 1 to 24.</ProgramCard>
+            <ProgramCard icon="🏫" iconBg="var(--orange-pale)" iconColor="var(--orange)" title="Cognitive Summer School" linkLabel="See the programme" onClick={() => go('Programs')}>An immersive holiday programme where every activity, from play to structured learning, is rooted in building cognitive strength.</ProgramCard>
+            <ProgramCard icon="🏗️" iconBg="var(--purple-pale)" iconColor="var(--purple)" title="Educational Complex" linkLabel="Read our big dream" onClick={() => go('Programs')}>Our flagship future project: Ghana's first dedicated cognitive development educational complex, serving ages 1 to 24, right here in Tema.</ProgramCard>
+          </div>
+        </Section>
+        <Section bg="var(--cream-deep)">
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}>
+            <div>
+              <Badge tone="plain">Anyoka Learning — browse &amp; buy at anyokalearning.com</Badge>
+              <h2 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'var(--text-h2)', fontWeight: 600, margin: '0.8rem 0 0.6rem' }}>"What can I actually do at home, today?"</h2>
+              <p style={{ color: 'var(--gray)', fontSize: '0.98rem', maxWidth: 480, margin: 0 }}>That's the question every parent asks us. These six resources are our answer — practical, affordable, and available now on Anyoka Learning.</p>
+            </div>
+            <HBtn variant="outline" onClick={() => go('Our Resources')}>See all resources</HBtn>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.4rem' }}>
+            <ProductCard color="var(--green)" tag="Digital · PDF" age="Ages 4 to 10" title="Brain Booster Activity Book" price="GHS 45" glyph={GLYPHS.plus} />
+            <ProductCard color="var(--orange)" tag="Digital · PDF" age="Ages 5 to 12" title="Weekly Cognitive Worksheet Pack" price="GHS 65" glyph={GLYPHS.grid} />
+            <ProductCard color="var(--purple)" tag="Physical" age="Ages 5 to 10" title="Cognitive Jigsaw Puzzle" price="GHS 60" glyph={GLYPHS.quads} />
+            <ProductCard color="var(--pink)" tag="Physical" age="Ages 3 to 8" title="Cognitive Flashcard Sets" price="GHS 35" glyph={GLYPHS.card} />
+          </div>
+        </Section>
+        <Section>
+          <div style={{ background: 'linear-gradient(135deg, var(--green) 0%, #0A5242 100%)', color: '#fff', borderRadius: 'var(--radius-hero)', padding: '4.5rem 3rem', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', bottom: '-30%', left: '-10%', width: 400, height: 400, borderRadius: '50%', background: 'rgba(245,200,66,0.10)' }}></div>
+            <div style={{ maxWidth: 680, position: 'relative' }}>
+              <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--gold)', margin: '0 0 0.8rem' }}>Our big dream</p>
+              <h2 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', fontWeight: 600, margin: '0 0 1.2rem' }}>Ghana's first cognitive development educational complex.</h2>
+              <p style={{ color: 'rgba(255,253,245,0.85)', fontSize: '1.05rem', lineHeight: 1.8, margin: '0 0 2rem' }}>We are building a world-class facility in Tema where children from age 1 through young adulthood at 24 are immersed in an environment built to help them catch every ounce of their potential.</p>
+              <HBtn variant="gold" onClick={() => go('Donate')}>Help us build it</HBtn>
+            </div>
+          </div>
+        </Section>
+        <Section style={{ paddingTop: 0 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center' }}>
+            <div>
+              <SectionHead label="School donations" title="Give a child a brain boost."
+                desc="We donate cognitive development kits, flashcards, puzzles, and activity books to under-resourced schools across Ghana. Sponsor a kit, or apply on behalf of your school." style={{ marginBottom: '2rem' }} />
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <HBtn onClick={() => go('School Donations')}>Sponsor a kit</HBtn>
+                <HBtn variant="outline" onClick={() => go('School Donations')}>Apply as a school</HBtn>
+              </div>
+            </div>
+            <StatRow stats={[
+              { value: 'GHS 2000', label: 'funds one classroom cognitive kit' },
+              { value: '0', label: 'schools reached so far — help us start the count' },
+              { value: '100%', label: 'of kit sponsorships go directly to materials' },
+            ]} />
+          </div>
+        </Section>
+        <Section style={{ paddingTop: 0, paddingBottom: '5.5rem' }}>
+          <NewsletterBand />
+        </Section>
       </div>
-      <a href="resources.html" class="btn btn-outline">See all resources</a>
-    </div>
-    <div class="product-grid">
-      <div class="product-card">
-        <div class="product-thumb" style="background:var(--green);">
-          <span class="tag">Digital · PDF</span>
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg>
-        </div>
-        <div class="product-body">
-          <span class="age">Ages 4–10</span>
-          <h4>Brain Booster Activity Book</h4>
-          <span class="price">GHS 45</span>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-thumb" style="background:var(--orange);">
-          <span class="tag">Digital · PDF</span>
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>
-        </div>
-        <div class="product-body">
-          <span class="age">Ages 5–12</span>
-          <h4>Weekly Cognitive Worksheet Pack</h4>
-          <span class="price">GHS 65</span>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-thumb" style="background:var(--purple);">
-          <span class="tag">Physical</span>
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        </div>
-        <div class="product-body">
-          <span class="age">Ages 5–10</span>
-          <h4>Cognitive Jigsaw Puzzle</h4>
-          <span class="price">GHS 60</span>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-thumb" style="background:var(--pink);">
-          <span class="tag">Physical</span>
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>
-        </div>
-        <div class="product-body">
-          <span class="age">Ages 3–8</span>
-          <h4>Cognitive Flashcard Sets</h4>
-          <span class="price">GHS 35</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    );
+  }
 
-<section>
-  <div class="section-inner">
-    <div class="dream">
-      <div class="dream-inner">
-        <p class="section-label">Our big dream</p>
-        <h2>Ghana's first cognitive development educational complex.</h2>
-        <p>We are building a world-class facility in Tema where children from age 1 through young adulthood at 24 are immersed in an environment built to help them catch every ounce of their potential. This is bigger than a building — it's a bet on the next generation of Ghanaian innovators.</p>
-        <a href="donate.html" class="btn btn-gold">Help us build it</a>
-      </div>
-    </div>
-  </div>
-</section>
+  // =====================
+  // ABOUT SCREEN
+  // =====================
+  const ADS = window.AnyokaFoundationDesignSystem_a7532e;
+  const { Button: ABtn } = ADS;
 
-<section>
-  <div class="section-inner school-teaser">
-    <div>
-      <p class="section-label">School donations</p>
-      <h2 class="section-title">Give a child a brain boost.</h2>
-      <p class="section-desc" style="margin-bottom:2rem;">We donate cognitive development kits — flashcards, puzzles, and activity books — to under-resourced schools across Ghana. Sponsor a kit, or apply on behalf of your school.</p>
-      <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-        <a href="school-donations.html" class="btn btn-primary">Sponsor a kit</a>
-        <a href="school-donations.html#apply" class="btn btn-outline">Apply as a school</a>
-      </div>
-    </div>
-    <div class="school-visual">
-      <div class="stat-row"><strong>GHS 150</strong><span>funds one classroom cognitive kit</span></div>
-      <div class="stat-row"><strong>0</strong><span>schools reached so far — help us start the count</span></div>
-      <div class="stat-row"><strong>100%</strong><span>of kit sponsorships go directly to materials</span></div>
-    </div>
-  </div>
-</section>
+  const aboutLbl = (color = 'var(--gold-deep)', center) => ({ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color, margin: '0 0 0.8rem', textAlign: center ? 'center' : 'left' });
+  const aboutTitle = (center, mb = '1.2rem') => ({ fontFamily: 'var(--font-serif-display)', fontSize: 'clamp(1.7rem, 3vw, 2.3rem)', fontWeight: 600, lineHeight: 1.2, margin: `0 ${center ? 'auto' : '0'} ${mb}`, color: 'var(--ink)', textAlign: center ? 'center' : 'left', maxWidth: center ? 600 : undefined });
 
-<section style="padding-top:0;">
-  <div class="section-inner">
-    <div class="section-head" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem;">
+  function AboutScreen({ go }) {
+    return (
+      <div style={{ fontFamily: 'var(--font-sans)' }}>
+        <header style={{ position: 'relative', overflow: 'hidden', background: 'var(--cream)', padding: '4.5rem 2rem 5rem' }}>
+          <style>{'@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}'}</style>
+          <div style={{ maxWidth: 'var(--content-max)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: '4rem', alignItems: 'center' }}>
+            <div>
+              <p style={aboutLbl('var(--green)')}>About Anyoka Foundation</p>
+              <h1 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'var(--text-hero)', fontWeight: 600, margin: '0 0 1.3rem', lineHeight: 1.08, letterSpacing: '-0.01em', color: 'var(--ink)' }}>A name that means <em style={{ color: 'var(--green)' }}>to catch</em>, and a mission to match.</h1>
+              <p style={{ fontSize: '1.1rem', color: 'var(--gray)', maxWidth: 520, margin: '0 0 2rem', lineHeight: 1.7 }}>We're a Ghanaian non-governmental organisation working to make sure no child's potential goes unclaimed — founded in 2025 in Tema, Greater Accra.</p>
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                {['Catch opportunities', 'Catch knowledge', 'Catch confidence', 'Catch potential'].map((c) => (
+                  <span key={c} style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--green)', border: '1px solid rgba(15,110,86,0.3)', padding: '8px 18px', borderRadius: 'var(--radius-pill)' }}>{c}</span>
+                ))}
+              </div>
+            </div>
+            <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', aspectRatio: '1/1' }}>
+              <div style={{ position: 'absolute', width: '100%', height: '100%', background: 'var(--green-pale)', borderRadius: '42% 58% 65% 35% / 45% 40% 60% 55%' }}></div>
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="#F5C842" style={{ position: 'absolute', top: '6%', right: '8%', animation: 'floaty 3.5s ease-in-out infinite' }}><path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"/></svg>
+              <div style={{ position: 'relative', zIndex: 2, background: '#fff', borderRadius: 24, padding: '2.2rem 2.4rem', boxShadow: 'var(--shadow-float)', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', maxWidth: 260 }}>
+                <img src="assets/logo.png" alt="Anyoka Foundation logo" style={{ width: 100, marginBottom: '1rem' }} />
+                <span style={{ fontFamily: 'var(--font-serif-display)', fontStyle: 'italic', fontSize: '1rem', color: 'var(--green)', fontWeight: 500, lineHeight: 1.45 }}>"Where young minds<br/>catch great ideas."</span>
+                <span style={{ fontSize: 11.5, color: 'var(--gray)', marginTop: '0.9rem', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Est. 2025 · Tema, Ghana</span>
+              </div>
+            </div>
+          </div>
+        </header>
+        <section style={{ padding: '0 2rem 4.5rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+            <div style={{ background: 'var(--green)', color: '#fff', borderRadius: 'var(--radius-band)', padding: '3.5rem 3rem', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+              <h2 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 600, margin: '0 0 1rem' }}>Anyoka means <em style={{ color: 'var(--gold)' }}>"to catch."</em></h2>
+              <p style={{ maxWidth: 600, margin: '0 auto', color: 'rgba(255,253,245,0.85)', fontSize: '1.05rem', lineHeight: 1.8 }}>Our mission is to help children catch opportunities, catch knowledge, catch confidence, and catch their full potential.</p>
+            </div>
+          </div>
+        </section>
+        <section style={{ padding: '0 2rem 4.5rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto', display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: '3.5rem', alignItems: 'flex-start' }}>
+            <div style={{ background: 'var(--cream-deep)', borderRadius: 'var(--radius-card-lg)', padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1.4rem', position: 'sticky', top: 100 }}>
+              <img src="assets/logo.png" alt="Anyoka Foundation logo" style={{ width: 70, marginBottom: '0.4rem' }} />
+              <h4 style={{ fontFamily: 'var(--font-serif-display)', fontSize: '1.2rem', fontWeight: 600, color: 'var(--green)', margin: 0 }}>Our founding story</h4>
+              <p style={{ borderLeft: '3px solid var(--gold)', paddingLeft: '1.2rem', fontFamily: 'var(--font-serif-display)', fontStyle: 'italic', fontSize: '1.05rem', color: 'var(--ink)', lineHeight: 1.6, margin: 0 }}>"Why do young people in places like China develop the capacity to innovate so early in life?"</p>
+              <p style={{ fontSize: '0.92rem', color: 'var(--gray)', lineHeight: 1.6, margin: 0 }}>That question, asked in 2025, became the starting point for everything we now build.</p>
+            </div>
+            <div>
+              <p style={aboutLbl()}>How we began</p>
+              <h2 style={aboutTitle(false, '1.6rem')}>The question that started it all</h2>
+              {['Anyoka Foundation was born out of a divine assignment — a calling to ask the questions many overlook. Why do young people in other parts of the world, especially in countries like China, develop the capacity to create, invent, and innovate at such an early age? What are they being taught that unlocks that potential?',
+                'The answer became clear: it begins with cognitive development. Many of us were never given the tools to fully engage our minds — to think critically, solve problems creatively, or develop our innate intelligence — simply because we were not exposed to that kind of learning growing up.',
+                'Anyoka Foundation exists to make sure every Ghanaian child is equipped to catch what life offers them — and one day, to build the kind of innovations the world looks to Ghana for.',
+                'Anyoka means "to catch" — a meaning that speaks directly to the mission: helping children catch opportunities, catch knowledge, catch confidence, and catch their full potential.',
+              ].map((p, i) => <p key={i} style={{ fontSize: '1.02rem', color: 'var(--ink)', lineHeight: 1.85, margin: '0 0 1.4rem' }}>{p}</p>)}
+            </div>
+          </div>
+        </section>
+        <section style={{ background: 'var(--cream-deep)', padding: '4.5rem 2rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+            <p style={aboutLbl('var(--gold-deep)', true)}>Leadership</p>
+            <h2 style={{ ...aboutTitle(true), marginBottom: '2.5rem' }}>Our leadership team</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.6rem' }}>
+              {[
+                { name: 'Justice Ayoka', role: 'Founder & Executive Director', photo: 'assets/justice-ayoka.jpg', bio: 'Justice Ayoka is an IT consultant and entrepreneur based in Greater Accra, Ghana. Growing up, he had early access to cognitive games that shaped a mathematical ability he credits as foundational. Anyoka Foundation is his answer to the question of why every Ghanaian child shouldn\'t have the same advantage.' },
+                { name: 'Emma Afenoko', role: 'Non-Executive Director', photo: 'assets/emma-afenoko.jpg', bio: 'Emma Afenoko is a banker and Non-Executive Director of Anyoka Foundation. An advocate for unlocking creative potential, Emma holds a deep conviction that no one should be denied the chance to develop their cognitive abilities for lack of support. Together with her husband, she makes every effort to give their children the opportunity to develop their full potential.' },
+                { name: 'Razak Sulleyman', role: 'Non-Executive Director', photo: 'assets/razak-sulleyman.jpg', bio: 'Razak Sulleyman is a mining professional and Non-Executive Director of Anyoka Foundation. A family man with a deep personal commitment to children\'s education, Razak joined the board out of a conviction that every child deserves the opportunity to develop their full potential.' },
+              ].map((p) => (
+                <div key={p.name} style={{ background: 'var(--ink)', color: '#fff', borderRadius: 22, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ aspectRatio: '1/1', background: 'var(--green-mid)', overflow: 'hidden' }}>
+                    <img src={p.photo} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  </div>
+                  <div style={{ padding: '1.6rem 1.5rem 1.8rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <h4 style={{ fontFamily: 'var(--font-serif-display)', fontSize: '1.18rem', fontWeight: 600, margin: '0 0 0.3rem' }}>{p.name}</h4>
+                    <p style={{ color: 'var(--gold)', fontSize: '0.76rem', fontWeight: 600, margin: '0 0 0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{p.role}</p>
+                    <p style={{ color: 'rgba(255,253,245,0.75)', fontSize: '0.88rem', lineHeight: 1.7, margin: 0, flex: 1 }}>{p.bio}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section style={{ padding: '4.5rem 2rem 2rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+            <p style={aboutLbl('var(--gold-deep)', true)}>Where we are today</p>
+            <h2 style={{ ...aboutTitle(true), marginBottom: '2.5rem' }}>Honest, in-progress, growing</h2>
+            <div style={{ display: 'flex', gap: '1.2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+              {[['var(--gold)', 'Registration in progress'], ['var(--green)', '6 products launched'], ['var(--orange)', 'Based in Tema, Ghana'], ['var(--purple)', 'Founded 2025']].map(([c, t]) => (
+                <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#fff', border: 'var(--border-card)', borderRadius: 'var(--radius-pill)', padding: '10px 18px', fontSize: '13.5px', fontWeight: 500, color: 'var(--ink)' }}>
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: c }}></span>{t}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section style={{ padding: '3rem 2rem 4.5rem', textAlign: 'center' }}>
+          <h2 style={aboutTitle(true)}>Want to be part of the story?</h2>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '1.5rem' }}>
+            <ABtn onClick={() => go('Donate')}>Support our mission</ABtn>
+            <ABtn variant="outline" onClick={() => go('Contact')}>Get in touch</ABtn>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  // =====================
+  // PROGRAMS, RESOURCES, SCHOOL DONATIONS, DONATE, BLOG, CONTACT, FREE GAMES, ANYOKA PLAY
+  // — Placeholder screens that load content from JSX
+  // =====================
+  function ProgramsScreen({ go }) {
+    const pLbl = (color, center) => ({ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color, margin: '0 0 0.8rem', textAlign: center ? 'center' : 'left' });
+    const ProgHead = ({ icon, iconBg, label, labelColor, title, desc }) => (
+      <div style={{ display: 'grid', gridTemplateColumns: '90px 1fr', gap: '2rem', alignItems: 'start', marginBottom: '2.5rem' }}>
+        <div style={{ width: 90, height: 90, borderRadius: 22, background: iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.6rem' }}>{icon}</div>
+        <div><p style={pLbl(labelColor)}>{label}</p><h2 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'clamp(1.7rem, 3vw, 2.3rem)', fontWeight: 600, lineHeight: 1.2, margin: '0 0 1rem', color: 'var(--ink)' }}>{title}</h2><p style={{ color: 'var(--gray)', fontSize: '1.02rem', lineHeight: 1.75, margin: 0, maxWidth: 680 }}>{desc}</p></div>
+      </div>
+    );
+    const { Button: PBtn } = window.AnyokaFoundationDesignSystem_a7532e;
+    return (
+      <div style={{ fontFamily: 'var(--font-sans)' }}>
+        <header style={{ position: 'relative', minHeight: 520, overflow: 'hidden', display: 'flex', alignItems: 'center', background: 'var(--cream)' }}>
+          <img src="assets/hero-programs.jpg" alt="Children playing with cognitive puzzles" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(255,253,245,0.96) 0%, rgba(255,253,245,0.9) 45%, rgba(255,253,245,0) 78%)' }}></div>
+          <div style={{ position: 'relative', zIndex: 2, maxWidth: 'var(--content-max)', margin: '0 auto', width: '100%', padding: '4.5rem 2rem', boxSizing: 'border-box' }}>
+            <div style={{ maxWidth: 540 }}>
+              <p style={pLbl('var(--gold-deep)')}>Our Programs</p>
+              <h1 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'var(--text-h1)', fontWeight: 600, margin: '0 0 1.2rem', lineHeight: 1.15, color: 'var(--ink)' }}>Five ways we build brighter minds.</h1>
+              <p style={{ fontSize: '1.05rem', color: '#4A4438', margin: 0, lineHeight: 1.7 }}>From everyday games to a future campus, every Anyoka programme is built around one idea: cognitive development belongs to every child.</p>
+            </div>
+          </div>
+        </header>
+        <section id="cognitive-games" style={{ padding: '4.5rem 2rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+            <ProgHead icon="🧩" iconBg="var(--green-pale)" label="Programme 01" labelColor="var(--green)" title="Cognitive Development Games" desc="Purposefully designed games and digital resources that build memory, attention, problem-solving, reasoning, and creative thinking in children and young people, ages 1 to 24." />
+            <PBtn onClick={() => go('Our Resources')}>Browse our resources</PBtn>
+          </div>
+        </section>
+        <section id="summer-school" style={{ background: 'var(--cream-deep)', padding: '4.5rem 2rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+            <ProgHead icon="🏫" iconBg="var(--orange-pale)" label="Programme 02" labelColor="var(--orange)" title="Cognitive Summer School" desc="An immersive holiday programme where every activity, from play to structured learning, is rooted in building cognitive strength and brain agility." />
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.2rem', marginBottom: '2rem' }}>
+              {[['Week 1', 'Discover', 'Memory, language, and attention.', 'var(--green)'], ['Week 2', 'Scientist', 'Logic and numbers.', 'var(--orange)'], ['Week 3', 'Create', 'Creativity and language.', 'var(--purple)'], ['Week 4', 'Lead', 'Social intelligence and logic.', 'var(--pink)']].map(([wk, h, p, bg]) => (
+                <div key={wk} style={{ background: bg, color: '#fff', borderRadius: 'var(--radius-card)', padding: '1.8rem 1.5rem' }}>
+                  <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', opacity: 0.8, marginBottom: 8 }}>{wk}</div>
+                  <h4 style={{ fontFamily: 'var(--font-serif-display)', fontSize: '1.25rem', fontWeight: 600, margin: '0 0 0.5rem' }}>{h}</h4>
+                  <p style={{ fontSize: '0.87rem', lineHeight: 1.6, margin: 0, opacity: 0.9 }}>{p}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section id="educational-complex" style={{ padding: '4.5rem 2rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+            <p style={pLbl('var(--gold-deep)', true)}>Programme 03 · Coming soon</p>
+            <div style={{ background: 'linear-gradient(135deg, var(--green) 0%, #0A5242 100%)', color: '#fff', borderRadius: 'var(--radius-hero)', padding: '4rem 3rem', position: 'relative', overflow: 'hidden' }}>
+              <h3 style={{ fontFamily: 'var(--font-serif-display)', fontSize: '1.7rem', fontWeight: 600, margin: '0 0 1.2rem' }}>Ghana's first dedicated cognitive development educational complex.</h3>
+              <p style={{ color: 'rgba(255,253,245,0.85)', fontSize: '1.02rem', lineHeight: 1.8, margin: '0 0 2rem' }}>We are building a world-class facility where children from age 1 through young adulthood at 24 are immersed in an environment built to help them catch every ounce of their potential.</p>
+              <PBtn variant="gold" onClick={() => go('Donate')}>Help us build it</PBtn>
+            </div>
+          </div>
+        </section>
+        <section id="foundation-support" style={{ background: 'var(--green-pale)', padding: '4.5rem 2rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+            <ProgHead icon="🤝" iconBg="#fff" label="Programme 04" labelColor="var(--gold-deep)" title="Foundation Support" desc="Anyoka Foundation recognises that cognitive development cannot happen without basic conditions being met — school furniture, clothing support, basic health access." />
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <PBtn onClick={() => go('School Donations')}>Support a school</PBtn>
+              <PBtn variant="outline" onClick={() => go('Donate')}>Donate to Foundation Support</PBtn>
+            </div>
+          </div>
+        </section>
+        <section id="anyoka-play" style={{ padding: '4.5rem 2rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+            <ProgHead icon="🎮" iconBg="var(--gold-pale)" label="Programme 05 · Phase 1 Pilot" labelColor="var(--gold-deep)" title="Anyoka Play" desc="A free, browser-based learning platform aligned with the Ghana GES/NaCCA curriculum. Mathematics is live for Basic 3 to Basic 6." />
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <a href="https://anyokaplay.anyokafoundation.org/" target="_blank" rel="noopener" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--green)', color: '#fff', borderRadius: 'var(--radius-pill)', padding: '13px 26px', fontWeight: 600, fontSize: 15, textDecoration: 'none' }}>Open Anyoka Play →</a>
+              <PBtn variant="outline" onClick={() => go('Anyoka Play')}>Learn more</PBtn>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  function ResourcesScreen({ go }) {
+    const { Button: RBtn } = window.AnyokaFoundationDesignSystem_a7532e;
+    const PRODUCTS = [
+      { color: 'var(--green)', tag: 'PDF · 15 pages', age: 'Ages 4 to 10', title: 'Brain Booster Activity Book', desc: '25 puzzles, memory games, logic challenges, and creative activities your child can do at home.', price: 'GHS 45' },
+      { color: 'var(--orange)', tag: 'PDF · 27 pages', age: 'Ages 5 to 12', title: 'Weekly Cognitive Worksheet Pack', desc: '4 weeks of daily worksheets covering all 7 cognitive skills.', price: 'GHS 65' },
+      { color: 'var(--blue)', tag: 'PDF · 37 pages', age: 'Ages 0 to 3', title: 'Toddler Brain Builder Guide', desc: '30 simple, no-toy-required activities across 3 age bands.', price: 'GHS 55' },
+      { color: 'var(--pink)', tag: 'PDF · 6 sets', age: 'Ages 3 to 8', title: 'Cognitive Flashcard Sets', desc: '6 printable sets covering memory, patterns, Ghana knowledge, feelings, and storytelling.', price: 'GHS 35' },
+      { color: 'var(--purple)', tag: 'PDF · 20 pages', age: 'Teachers · Ages 5 to 14', title: 'Teacher Cognitive Toolkit', desc: 'A full-term 10-week classroom programme with lesson structures, games, and assessments.', price: 'GHS 120' },
+      { color: 'var(--gold-deep)', tag: 'PDF · 29 pages', age: 'Ages 6 to 14', title: 'Summer School-in-a-Box', desc: '4 weeks, 20 daily activities, achievement badges, and a graduation certificate.', price: 'GHS 180' },
+    ];
+    return (
+      <div style={{ fontFamily: 'var(--font-sans)' }}>
+        <header style={{ position: 'relative', minHeight: 480, overflow: 'hidden', display: 'flex', alignItems: 'center', background: 'var(--cream)' }}>
+          <img src="assets/hero-resources.jpg" alt="Anyoka Learning resources" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(255,253,245,0.96) 0%, rgba(255,253,245,0.9) 45%, rgba(255,253,245,0) 78%)' }}></div>
+          <div style={{ position: 'relative', zIndex: 2, maxWidth: 'var(--content-max)', margin: '0 auto', width: '100%', padding: '4.5rem 2rem' }}>
+            <div style={{ maxWidth: 540 }}>
+              <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--gold-deep)', margin: '0 0 1rem' }}>Anyoka Learning</p>
+              <h1 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'var(--text-h1)', fontWeight: 600, margin: '0 0 1.2rem', lineHeight: 1.15, color: 'var(--ink)' }}>Cognitive tools, ready to use today.</h1>
+              <p style={{ fontSize: '1.05rem', color: '#4A4438', margin: 0, lineHeight: 1.7 }}>Every resource is published by Anyoka Learning. Browse here, purchase on our dedicated store.</p>
+            </div>
+          </div>
+        </header>
+        <section style={{ padding: '3rem 2rem 4.5rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+            <div style={{ background: 'var(--ink)', color: 'rgba(255,253,245,0.85)', borderRadius: 'var(--radius-card)', padding: '1.6rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
+              <p style={{ fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}><strong style={{ color: '#fff' }}>All products are sold on our Anyoka Learning store.</strong><br/>Browse, purchase securely, and receive your download instantly.</p>
+              <RBtn variant="gold" href="https://anyokalearning.com" target="_blank" rel="noopener">Visit Anyoka Learning →</RBtn>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.6rem' }}>
+              {PRODUCTS.map(({ color, tag, age, title, desc, price }) => (
+                <div key={title} style={{ background: '#fff', borderRadius: 'var(--radius-card-sm)', overflow: 'hidden', border: 'var(--border-card)', display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ height: 150, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', background: color }}>
+                    <span style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(255,255,255,0.92)', color: 'var(--ink)', fontSize: '10.5px', fontWeight: 700, padding: '4px 10px', borderRadius: 'var(--radius-pill)' }}>{tag}</span>
+                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FFFDF5" strokeWidth="1.5"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg>
+                  </div>
+                  <div style={{ padding: '1.2rem 1.3rem 1.4rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--gray)', marginBottom: 6 }}>{age}</span>
+                    <h3 style={{ fontFamily: 'var(--font-serif-display)', fontSize: '1.05rem', fontWeight: 600, margin: '0 0 6px', lineHeight: 1.3, color: 'var(--ink)' }}>{title}</h3>
+                    <p style={{ fontSize: '0.86rem', color: 'var(--gray)', lineHeight: 1.6, margin: '0 0 1rem', flex: 1 }}>{desc}</p>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.95rem', color: 'var(--green)', fontWeight: 700 }}>{price}</span>
+                      <a href="https://anyokalearning.com" target="_blank" rel="noopener" style={{ fontSize: 13, fontWeight: 700, color: '#fff', background: 'var(--green)', padding: '7px 16px', borderRadius: 'var(--radius-pill)', textDecoration: 'none' }}>Get it</a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  function SchoolDonationsScreen({ go }) {
+    const { Button: SBtn } = window.AnyokaFoundationDesignSystem_a7532e;
+    return (
+      <div style={{ fontFamily: 'var(--font-sans)' }}>
+        <header style={{ position: 'relative', minHeight: 480, overflow: 'hidden', display: 'flex', alignItems: 'center', background: 'var(--cream)' }}>
+          <img src="assets/hero-school-donations.jpg" alt="School donations" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(255,253,245,0.96) 0%, rgba(255,253,245,0.9) 45%, rgba(255,253,245,0) 78%)' }}></div>
+          <div style={{ position: 'relative', zIndex: 2, maxWidth: 'var(--content-max)', margin: '0 auto', width: '100%', padding: '4.5rem 2rem' }}>
+            <div style={{ maxWidth: 540 }}>
+              <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--gold-deep)', margin: '0 0 1rem' }}>School Donations</p>
+              <h1 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'var(--text-h1)', fontWeight: 600, margin: '0 0 1.2rem', lineHeight: 1.15, color: 'var(--ink)' }}>Give a child a brain boost.</h1>
+              <p style={{ fontSize: '1.05rem', color: '#4A4438', margin: '0 0 2rem', lineHeight: 1.7 }}>We donate cognitive development kits to under-resourced schools across Ghana. Sponsor a kit, or apply on behalf of your school.</p>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <SBtn onClick={() => go('Donate')}>Sponsor a kit</SBtn>
+                <SBtn variant="outline" onClick={() => go('Contact')}>Apply as a school</SBtn>
+              </div>
+            </div>
+          </div>
+        </header>
+        <section style={{ padding: '4.5rem 2rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.6rem' }}>
+              {[
+                { tier: 'Starter Kit', price: 'GHS 50', items: ['Activity book', 'Flashcard set', 'Parent guide'], color: 'var(--green)' },
+                { tier: 'Classroom Kit', price: 'GHS 150', items: ['30 activity books', 'Puzzle set', 'Teacher toolkit'], color: 'var(--orange)' },
+                { tier: 'School Bundle', price: 'GHS 600', items: ['Full school supply', 'All 6 products', 'Teacher training guide'], color: 'var(--purple)' },
+              ].map(({ tier, price, items, color }) => (
+                <div key={tier} style={{ background: '#fff', border: 'var(--border-card)', borderRadius: 'var(--radius-card)', padding: '2rem', display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ width: 48, height: 6, borderRadius: 3, background: color, marginBottom: '1.2rem' }}></div>
+                  <h3 style={{ fontFamily: 'var(--font-serif-display)', fontSize: '1.2rem', fontWeight: 600, margin: '0 0 0.4rem', color: 'var(--ink)' }}>{tier}</h3>
+                  <p style={{ fontSize: '1.4rem', fontWeight: 700, color, margin: '0 0 1rem' }}>{price}</p>
+                  <ul style={{ margin: 0, padding: '0 0 0 1.2rem', color: 'var(--gray)', fontSize: '0.92rem', lineHeight: 2 }}>
+                    {items.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                  <SBtn style={{ marginTop: '1.5rem' }} onClick={() => go('Donate')}>Sponsor this kit</SBtn>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  function DonateScreen({ go }) {
+    const { Button: DBtn } = window.AnyokaFoundationDesignSystem_a7532e;
+    const [freq, setFreq] = React.useState('once');
+    const amounts = freq === 'once' ? ['GHS 50', 'GHS 100', 'GHS 200', 'GHS 500', 'GHS 1000'] : ['GHS 20/mo', 'GHS 50/mo', 'GHS 100/mo', 'GHS 200/mo'];
+    const [selected, setSelected] = React.useState(amounts[1]);
+    React.useEffect(() => { setSelected(amounts[1]); }, [freq]);
+    return (
+      <div style={{ fontFamily: 'var(--font-sans)' }}>
+        <header style={{ padding: '4.5rem 2rem 3rem', textAlign: 'center', background: 'var(--cream)' }}>
+          <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--gold-deep)', margin: '0 0 1rem' }}>Donate</p>
+          <h1 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'var(--text-h1)', fontWeight: 600, maxWidth: 700, margin: '0 auto 1.2rem', lineHeight: 1.15, color: 'var(--ink)' }}>Invest in a child's potential.</h1>
+          <p style={{ fontSize: '1.05rem', color: 'var(--gray)', maxWidth: 560, margin: '0 auto', lineHeight: 1.7 }}>Every cedi you give goes directly to building the tools, programmes, and environments that help Ghanaian children catch their potential.</p>
+        </header>
+        <section style={{ padding: '2rem 2rem 5rem' }}>
+          <div style={{ maxWidth: 680, margin: '0 auto', background: '#fff', border: 'var(--border-card)', borderRadius: 'var(--radius-card-lg)', padding: '2.5rem', boxShadow: 'var(--shadow-float)' }}>
+            <div style={{ display: 'flex', background: 'var(--cream-deep)', borderRadius: 'var(--radius-pill)', padding: 4, marginBottom: '2rem' }}>
+              {['once', 'monthly'].map((f) => (
+                <button key={f} onClick={() => setFreq(f)} style={{ flex: 1, padding: '10px', borderRadius: 'var(--radius-pill)', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: 14, background: freq === f ? 'var(--green)' : 'transparent', color: freq === f ? '#fff' : 'var(--ink)', fontFamily: 'inherit', transition: 'all 0.2s' }}>
+                  {f === 'once' ? 'Give once' : 'Give monthly'}
+                </button>
+              ))}
+            </div>
+            <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--gray)', textTransform: 'uppercase', letterSpacing: '0.06em', margin: '0 0 1rem' }}>Choose an amount</p>
+            <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+              {amounts.map((a) => (
+                <button key={a} onClick={() => setSelected(a)} style={{ padding: '10px 20px', borderRadius: 'var(--radius-pill)', border: `2px solid ${selected === a ? 'var(--green)' : 'var(--border)'}`, background: selected === a ? 'var(--green-pale)' : '#fff', color: selected === a ? 'var(--green)' : 'var(--ink)', fontWeight: 600, fontSize: 14, cursor: 'pointer', fontFamily: 'inherit' }}>
+                  {a}
+                </button>
+              ))}
+            </div>
+            <DBtn style={{ width: '100%', justifyContent: 'center', padding: '1rem' }}>Donate {selected} via Paystack</DBtn>
+            <p style={{ fontSize: 12, color: 'var(--gray)', textAlign: 'center', marginTop: '1rem' }}>Secured by Paystack · 100% goes to Anyoka programmes</p>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  function BlogScreen() {
+    const posts = [
+      { emoji: '🧠', cat: 'Founder', title: 'Why I started Anyoka Foundation', date: 'July 2025', excerpt: 'Growing up in Ghana, I played Ampe, Kpitinge, and listened to Ananse stories. I didn\'t know it then, but those games were building my brain. Psalm 11:3 asks: "If the foundations are destroyed, what can the righteous do?" This foundation is my answer.', author: 'Justice Ayoka' },
+      { emoji: '🎯', cat: 'For teachers', title: '7 cognitive skills every child needs', date: 'August 2025', excerpt: 'A practical framework for building memory, logic, and creativity in the classroom — mapped to the Ghana GES curriculum.', author: 'Anyoka Foundation' },
+      { emoji: '🎲', cat: 'At home', title: '5 brain games using things you already own', date: 'September 2025', excerpt: 'No toys, no budget needed — just a kitchen, a market trip, and ten minutes a day. Here are five activities any Ghanaian parent can do right now.', author: 'Anyoka Foundation' },
+    ];
+    return (
+      <div style={{ fontFamily: 'var(--font-sans)' }}>
+        <header style={{ padding: '4.5rem 2rem 3rem', textAlign: 'center', background: 'var(--cream)' }}>
+          <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--gold-deep)', margin: '0 0 1rem' }}>Blog</p>
+          <h1 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'var(--text-h1)', fontWeight: 600, maxWidth: 700, margin: '0 auto 1.2rem', lineHeight: 1.15, color: 'var(--ink)' }}>Ideas worth catching.</h1>
+        </header>
+        <section style={{ padding: '2rem 2rem 5rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            {posts.map((post) => (
+              <div key={post.title} style={{ background: '#fff', border: 'var(--border-card)', borderRadius: 'var(--radius-card)', padding: '2rem 2.2rem', display: 'grid', gridTemplateColumns: '80px 1fr', gap: '2rem', alignItems: 'start' }}>
+                <div style={{ width: 80, height: 80, borderRadius: 18, background: 'var(--green-pale)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.4rem' }}>{post.emoji}</div>
+                <div>
+                  <div style={{ display: 'flex', gap: 10, marginBottom: '0.6rem', flexWrap: 'wrap' }}>
+                    <span style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--green)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{post.cat}</span>
+                    <span style={{ fontSize: 11.5, color: 'var(--gray)' }}>· {post.date}</span>
+                  </div>
+                  <h2 style={{ fontFamily: 'var(--font-serif-display)', fontSize: '1.4rem', fontWeight: 600, margin: '0 0 0.8rem', color: 'var(--ink)' }}>{post.title}</h2>
+                  <p style={{ fontSize: '0.95rem', color: 'var(--gray)', lineHeight: 1.7, margin: '0 0 0.8rem' }}>{post.excerpt}</p>
+                  <p style={{ fontSize: 12.5, color: 'var(--gray)', margin: 0 }}>By {post.author}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  function ContactScreen() {
+    const [sent, setSent] = React.useState(false);
+    return (
+      <div style={{ fontFamily: 'var(--font-sans)' }}>
+        <header style={{ padding: '4rem 2rem 2.5rem', textAlign: 'center' }}>
+          <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--gold-deep)', margin: '0 0 1rem' }}>Contact</p>
+          <h1 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'var(--text-h1)', fontWeight: 600, maxWidth: 700, margin: '0 auto 1.2rem', lineHeight: 1.15, color: 'var(--ink)' }}>Let's start a conversation.</h1>
+          <p style={{ fontSize: '1.05rem', color: 'var(--gray)', maxWidth: 560, margin: '0 auto', lineHeight: 1.7 }}>Questions about a product, a school application, volunteering, or a partnership — we reply within 1 to 2 business days.</p>
+        </header>
+        <section style={{ padding: '2rem 2rem 4.5rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto', display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: '2rem', alignItems: 'start' }}>
+            <div style={{ background: 'var(--cream-deep)', borderRadius: 'var(--radius-card-lg)', padding: '2.2rem', display: 'flex', flexDirection: 'column', gap: '1.3rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-serif-display)', fontSize: '1.2rem', fontWeight: 600, margin: 0, color: 'var(--ink)' }}>Contact information</h3>
+              {[
+                { icon: '📧', label: 'Email', value: 'info@anyokafoundation.org', href: 'mailto:info@anyokafoundation.org' },
+                { icon: '📍', label: 'Location', value: 'Tema, Greater Accra, Ghana', href: null },
+                { icon: '🌐', label: 'Website', value: 'anyokafoundation.org', href: 'https://anyokafoundation.org' },
+              ].map(({ icon, label, value, href }) => (
+                <div key={label} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                  <div style={{ width: 40, height: 40, borderRadius: 12, background: 'var(--green-pale)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', flexShrink: 0 }}>{icon}</div>
+                  <div>
+                    <p style={{ fontSize: 11.5, color: 'var(--gray)', margin: '0 0 2px', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600 }}>{label}</p>
+                    {href ? <a href={href} style={{ fontSize: '0.95rem', color: 'var(--ink)', fontWeight: 500, textDecoration: 'none' }}>{value}</a> : <p style={{ fontSize: '0.95rem', color: 'var(--ink)', margin: 0, fontWeight: 500 }}>{value}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+            {sent ? (
+              <div style={{ background: 'var(--green-pale)', borderRadius: 'var(--radius-card-lg)', padding: '3rem', textAlign: 'center' }}>
+                <p style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>✅</p>
+                <h3 style={{ fontFamily: 'var(--font-serif-display)', fontSize: '1.4rem', fontWeight: 600, color: 'var(--green)', margin: '0 0 0.6rem' }}>Message sent!</h3>
+                <p style={{ color: 'var(--gray)', fontSize: '0.95rem' }}>We'll be in touch within 1 to 2 business days.</p>
+              </div>
+            ) : (
+              <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} style={{ background: '#fff', border: 'var(--border-card)', borderRadius: 'var(--radius-card-lg)', padding: '2.2rem', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-serif-display)', fontSize: '1.2rem', fontWeight: 600, margin: 0, color: 'var(--ink)' }}>Send a message</h3>
+                {[['Name', 'text', 'Your full name'], ['Email', 'email', 'your@email.com'], ['Subject', 'text', 'What is this about?']].map(([label, type, placeholder]) => (
+                  <div key={label}>
+                    <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 6 }}>{label}</label>
+                    <input type={type} placeholder={placeholder} required style={{ width: '100%', padding: '12px 16px', borderRadius: 'var(--radius-input)', border: '1.5px solid var(--border)', fontSize: 15, fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box', background: 'var(--cream)' }} />
+                  </div>
+                ))}
+                <div>
+                  <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: 'var(--ink)', marginBottom: 6 }}>Message</label>
+                  <textarea placeholder="Tell us more..." required rows={5} style={{ width: '100%', padding: '12px 16px', borderRadius: 'var(--radius-input)', border: '1.5px solid var(--border)', fontSize: 15, fontFamily: 'inherit', outline: 'none', resize: 'vertical', boxSizing: 'border-box', background: 'var(--cream)' }} />
+                </div>
+                <button type="submit" style={{ background: 'var(--green)', color: '#fff', border: 'none', borderRadius: 'var(--radius-pill)', padding: '14px', fontSize: 15, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>Send message</button>
+              </form>
+            )}
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  function FreeGamesScreen({ go }) {
+    return (
+      <div style={{ fontFamily: 'var(--font-sans)' }}>
+        <header style={{ padding: '4.5rem 2rem 3rem', textAlign: 'center', background: 'var(--cream)' }}>
+          <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--gold-deep)', margin: '0 0 1rem' }}>Free Games</p>
+          <h1 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'var(--text-h1)', fontWeight: 600, maxWidth: 700, margin: '0 auto 1.2rem', lineHeight: 1.15, color: 'var(--ink)' }}>Play. Think. Grow.</h1>
+          <p style={{ fontSize: '1.05rem', color: 'var(--gray)', maxWidth: 560, margin: '0 auto', lineHeight: 1.7 }}>Two free browser games built by Anyoka Foundation. No download, no sign-up — just play.</p>
+        </header>
+        <section style={{ padding: '2rem 2rem 5rem' }}>
+          <div style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+            {[
+              { emoji: '🔢', title: 'Mental Maths Challenge', desc: 'Race against the clock to solve mental arithmetic problems across 4 difficulty levels. Builds number fluency and thinking speed.', color: 'var(--green)', href: 'games/maths-game.html', tag: 'Ages 6 to 14' },
+              { emoji: '🏛️', title: 'Ghana Heritage Game', desc: 'Discover Ghana\'s historic forts, castles, and cultural landmarks through 3 interactive modes — identity quiz, heritage sites, and memory match.', color: 'var(--orange)', href: 'games/heritage-game.html', tag: 'Ages 8 to 18' },
+            ].map(({ emoji, title, desc, color, href, tag }) => (
+              <div key={title} style={{ background: '#fff', border: 'var(--border-card)', borderRadius: 'var(--radius-card-lg)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ height: 200, background: color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '5rem' }}>{emoji}</div>
+                <div style={{ padding: '1.8rem 2rem 2rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  <span style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--gray)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>{tag}</span>
+                  <h2 style={{ fontFamily: 'var(--font-serif-display)', fontSize: '1.35rem', fontWeight: 600, margin: '0 0 0.8rem', color: 'var(--ink)' }}>{title}</h2>
+                  <p style={{ fontSize: '0.95rem', color: 'var(--gray)', lineHeight: 1.7, flex: 1 }}>{desc}</p>
+                  <a href={href} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginTop: '1.5rem', background: color, color: '#fff', padding: '13px 26px', borderRadius: 'var(--radius-pill)', fontWeight: 700, fontSize: 15, textDecoration: 'none', alignSelf: 'flex-start' }}>Play now →</a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  function AnyokaPlayScreen({ go }) {
+    return (
+      <div style={{ fontFamily: 'var(--font-sans)' }}>
+        <header style={{ padding: '4.5rem 2rem 3rem', background: 'var(--ink)', color: '#fff', textAlign: 'center' }}>
+          <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--gold)', margin: '0 0 1rem' }}>Anyoka Play · Phase 1 Pilot</p>
+          <h1 style={{ fontFamily: 'var(--font-serif-display)', fontSize: 'var(--text-h1)', fontWeight: 600, maxWidth: 700, margin: '0 auto 1.2rem', lineHeight: 1.15 }}>Free curriculum-aligned maths. For every Ghanaian child.</h1>
+          <p style={{ fontSize: '1.05rem', color: 'rgba(255,253,245,0.8)', maxWidth: 560, margin: '0 auto 2rem', lineHeight: 1.7 }}>Anyoka Play is a free, browser-based learning platform aligned with the Ghana GES/NaCCA curriculum. Basic 3 to 6 Mathematics is live now.</p>
+          <a href="https://anyokaplay.anyokafoundation.org/" target="_blank" rel="noopener" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--gold)', color: 'var(--ink)', padding: '14px 30px', borderRadius: 'var(--radius-pill)', fontWeight: 700, fontSize: 16, textDecoration: 'none' }}>Open Anyoka Play →</a>
+        </header>
+        <section style={{ padding: '4.5rem 2rem' }}>
+          <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.6rem' }}>
+              {[
+                { icon: '📐', title: 'GES/NaCCA aligned', desc: 'Every activity maps directly to the primary mathematics syllabus for Basic 3 to 6.' },
+                { icon: '📱', title: 'Any device', desc: 'Works in any browser on any phone. No app download, no IT setup required.' },
+                { icon: '🇬🇭', title: 'Built for Ghana', desc: 'Questions set in Ghanaian contexts — Makola market, Kejetia, everyday community life.' },
+              ].map(({ icon, title, desc }) => (
+                <div key={title} style={{ background: '#fff', border: 'var(--border-card)', borderRadius: 'var(--radius-card)', padding: '2rem' }}>
+                  <div style={{ width: 52, height: 52, borderRadius: 14, background: 'var(--green-pale)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem', marginBottom: '1rem' }}>{icon}</div>
+                  <h3 style={{ fontFamily: 'var(--font-serif-display)', fontSize: '1.1rem', fontWeight: 600, margin: '0 0 0.5rem', color: 'var(--ink)' }}>{title}</h3>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--gray)', lineHeight: 1.65, margin: 0 }}>{desc}</p>
+                </div>
+              ))}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: '3rem', padding: '3rem', background: 'var(--green-pale)', borderRadius: 'var(--radius-card-lg)' }}>
+              <h3 style={{ fontFamily: 'var(--font-serif-display)', fontSize: '1.5rem', fontWeight: 600, margin: '0 0 0.8rem', color: 'var(--ink)' }}>Ready to try it?</h3>
+              <p style={{ color: 'var(--gray)', fontSize: '1rem', margin: '0 0 1.5rem' }}>Visit anyokaplay.anyokafoundation.org — works on any device, no sign-up needed.</p>
+              <a href="https://anyokaplay.anyokafoundation.org/" target="_blank" rel="noopener" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--green)', color: '#fff', padding: '14px 28px', borderRadius: 'var(--radius-pill)', fontWeight: 700, fontSize: 15, textDecoration: 'none' }}>Open Anyoka Play →</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  // =====================
+  // FOOTER
+  // =====================
+  function Footer({ go }) {
+    return (
+      <footer style={{ background: 'var(--ink)', color: 'rgba(255,253,245,0.7)', padding: '4rem 2rem 2.5rem', fontFamily: 'var(--font-sans)' }}>
+        <div style={{ maxWidth: 'var(--content-max)', margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1.5fr repeat(3, 1fr)', gap: '3rem', marginBottom: '3rem' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1rem' }}>
+                <img src="assets/logo-cream.svg" alt="Anyoka Foundation" style={{ width: 36 }} onError={(e) => { e.target.src = 'assets/logo.png'; }} />
+                <div>
+                  <strong style={{ display: 'block', fontFamily: 'var(--font-serif-display)', fontSize: 16, fontWeight: 600, color: '#fff' }}>Anyoka Foundation</strong>
+                  <span style={{ fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Tema, Ghana · Est. 2025</span>
+                </div>
+              </div>
+              <p style={{ fontSize: '0.88rem', lineHeight: 1.7, maxWidth: 260, margin: '0 0 1rem' }}>Where Young Minds Catch Great Ideas. A Ghanaian NGO building cognitive development tools for children ages 1 to 24.</p>
+              <a href="mailto:info@anyokafoundation.org" style={{ fontSize: '0.85rem', color: 'var(--gold)', textDecoration: 'none' }}>info@anyokafoundation.org</a>
+            </div>
+            <div>
+              <p style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#fff', margin: '0 0 1rem' }}>Organisation</p>
+              {['About', 'Programs', 'Blog', 'Contact'].map((l) => (
+                <a key={l} href="#" onClick={(e) => { e.preventDefault(); go(l); }} style={{ display: 'block', fontSize: '0.88rem', color: 'rgba(255,253,245,0.65)', textDecoration: 'none', marginBottom: 8, transition: 'color 0.2s' }}>{l}</a>
+              ))}
+            </div>
+            <div>
+              <p style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#fff', margin: '0 0 1rem' }}>Resources</p>
+              {[['Our Resources', 'Our Resources'], ['School Donations', 'School Donations'], ['Free Games', 'Free Games'], ['Anyoka Play', 'Anyoka Play']].map(([label, screen]) => (
+                <a key={label} href="#" onClick={(e) => { e.preventDefault(); go(screen); }} style={{ display: 'block', fontSize: '0.88rem', color: 'rgba(255,253,245,0.65)', textDecoration: 'none', marginBottom: 8 }}>{label}</a>
+              ))}
+            </div>
+            <div>
+              <p style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#fff', margin: '0 0 1rem' }}>Support</p>
+              <a href="#" onClick={(e) => { e.preventDefault(); go('Donate'); }} style={{ display: 'block', fontSize: '0.88rem', color: 'rgba(255,253,245,0.65)', textDecoration: 'none', marginBottom: 8 }}>Donate</a>
+              <a href="https://anyokalearning.com" target="_blank" rel="noopener" style={{ display: 'block', fontSize: '0.88rem', color: 'rgba(255,253,245,0.65)', textDecoration: 'none', marginBottom: 8 }}>Anyoka Learning Store</a>
+            </div>
+          </div>
+          <div style={{ borderTop: '1px solid rgba(255,253,245,0.1)', paddingTop: '1.5rem', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', fontSize: '0.82rem' }}>
+            <span>© 2025 Anyoka Foundation. All rights reserved.</span>
+            <span>Built with purpose in Tema, Ghana 🇬🇭</span>
+          </div>
+        </div>
+      </footer>
+    );
+  }
+
+  // =====================
+  // APP ROUTER
+  // =====================
+  const SCREENS = {
+    'Home': (go) => <HomeScreen go={go} />,
+    'About': (go) => <AboutScreen go={go} />,
+    'Programs': (go) => <ProgramsScreen go={go} />,
+    'Our Resources': (go) => <ResourcesScreen go={go} />,
+    'School Donations': (go) => <SchoolDonationsScreen go={go} />,
+    'Donate': (go) => <DonateScreen go={go} />,
+    'Blog': (go) => <BlogScreen go={go} />,
+    'Contact': (go) => <ContactScreen go={go} />,
+    'Free Games': (go) => <FreeGamesScreen go={go} />,
+    'Anyoka Play': (go) => <AnyokaPlayScreen go={go} />,
+  };
+
+  function App() {
+    const getInitial = () => {
+      try { return localStorage.getItem('anyoka-screen') || 'Home'; } catch { return 'Home'; }
+    };
+    const [screen, setScreen] = React.useState(getInitial());
+    const go = (s) => {
+      setScreen(s);
+      try { localStorage.setItem('anyoka-screen', s); } catch {}
+      window.scrollTo(0, 0);
+    };
+    const render = SCREENS[screen] || SCREENS['Home'];
+    return (
       <div>
-        <p class="section-label">From the blog</p>
-        <h2 class="section-title" style="margin-bottom:0;">Ideas worth catching</h2>
+        <SiteNavBar active={screen} onNavigate={go} />
+        {render(go)}
+        <Footer go={go} />
       </div>
-      <a href="blog.html" class="btn btn-outline">Read more</a>
-    </div>
-    <div class="blog-grid">
-      <a href="blog.html" class="blog-card">
-        <div class="blog-thumb" style="background:var(--green-pale);">🧠</div>
-        <div class="blog-body">
-          <span class="blog-cat">Early years</span>
-          <h4>Why the first 3 years matter most</h4>
-          <p>The science behind early brain development — and what it means for Ghanaian parents.</p>
-        </div>
-      </a>
-      <a href="blog.html" class="blog-card">
-        <div class="blog-thumb" style="background:#FEF0E6;">🎯</div>
-        <div class="blog-body">
-          <span class="blog-cat">For teachers</span>
-          <h4>7 cognitive skills every child needs</h4>
-          <p>A practical framework for building memory, logic, and creativity in the classroom.</p>
-        </div>
-      </a>
-      <a href="blog.html" class="blog-card">
-        <div class="blog-thumb" style="background:#FBEAF0;">🎲</div>
-        <div class="blog-body">
-          <span class="blog-cat">At home</span>
-          <h4>5 brain games using things you already own</h4>
-          <p>No toys, no budget needed — just a kitchen, a market trip, and ten minutes a day.</p>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
+    );
+  }
 
-<section style="padding-top:0;">
-  <div class="section-inner">
-    <div class="newsletter">
-      <div>
-        <h3>Stay close to the mission.</h3>
-        <p>One email a month — new products, programme updates, and stories from the field.</p>
-      </div>
-      <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
-        <input type="email" placeholder="Your email address" required>
-        <button type="submit">Subscribe</button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-brand">
-        <img src="assets/logo.png" alt="Anyoka Foundation logo">
-        <strong>Anyoka Foundation</strong>
-      </div>
-      <p style="font-size:14px; max-width:280px; margin-bottom:1.2rem;">Where young minds catch great ideas. Tema, Greater Accra, Ghana.</p>
-      <p style="font-size:13px; color:var(--gold); font-style:italic;">Catch Potential. Change Futures.</p>
-    </div>
-    <div>
-      <h5>Explore</h5>
-      <ul>
-        <li><a href="about.html">About us</a></li>
-        <li><a href="programs.html">Programs</a></li>
-        <li><a href="resources.html">Our Resources</a></li>
-        <li><a href="blog.html">Blog</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Get involved</h5>
-      <ul>
-        <li><a href="donate.html">Donate</a></li>
-        <li><a href="school-donations.html">School donations</a></li>
-        <li><a href="contact.html">Volunteer</a></li>
-        <li><a href="contact.html">Partner with us</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Contact</h5>
-      <ul>
-        <li><a href="mailto:info@anyokafoundation.org">info@anyokafoundation.org</a></li>
-        <li><a href="#">Tema, Greater Accra</a></li>
-        <li><a href="contact.html">Contact form</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2025 Anyoka Foundation. An Anyoka Learning resource.</span>
-    <div class="footer-social">
-      <a href="#" aria-label="Instagram">IG</a>
-      <a href="#" aria-label="Facebook">FB</a>
-      <a href="#" aria-label="WhatsApp">WA</a>
-    </div>
-    <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
-  </div>
-</footer>
-
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
 </body>
 </html>
